@@ -2,7 +2,33 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<section id="greeting_and_logout" style="margin-right:50px; margin-top:5px">
+    <div style="text-align:right">
+        歡迎XXX &nbsp
+        <button type="button" class="btn btn-danger">登出</button>
+    </div>
+</section>
+<br>
+<section id="choose_purpose" align="center">
+    <button type="button" class="btn btn-secondary btn-lg">
+        公開行程
+    </button>
+    <button type="button" class="btn btn-secondary btn-lg">
+        私人景點
+    </button>
+    <button type="button" class="btn btn-secondary btn-lg">
+        行程規劃
+    </button>
+</section>
+<br>
+<section id="search_bar" style="width: 40%; margin-left:30%;">
+    <div id="search">
+        <input id="search_input" class="form-control" type="text" placeholder="搜尋" aria-label="Search">
+    </div>
+</section>
+<br>
+<section>
+    <div id="map-container-google-1" class="z-depth-1-half map-container" style="height: 500px;">
+        <iframe src="https://maps.google.com/maps?q=manhatan&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" style="border:0" allowfullscreen></iframe>
+    </div>
+</section>
