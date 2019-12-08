@@ -12,6 +12,7 @@ using NCUSE12_Taoyuan_Tourism_WebAPP.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MvcMovie.Data;
 
 namespace NCUSE12_Taoyuan_Tourism_WebAPP
 {
@@ -66,6 +67,12 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP
                 options.AccessDeniedPath = "/Identity/Account/AccessDenied";
                 options.SlidingExpiration = true;
             });
+
+            services.AddControllersWithViews();
+
+            services.AddDbContext<SpotDbContext>(options =>
+        options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

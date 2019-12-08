@@ -3,27 +3,37 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using MvcMovie.Data;
+using NCUSE12_Taoyuan_Tourism_WebAPP.Data;
 using NCUSE12_Taoyuan_Tourism_WebAPP.Models;
 
 namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot.CreateSpot
 {
     public class CreatePublicSpotController : CreateSpotController
     {
-        public override IActionResult Index()
+    
+        public CreatePublicSpotController(SpotDbContext context) : base(context)
         {
-            return View();
-        }
-
-        [HttpGet]
-        public IActionResult Get(int Id)
-        {
-            return Json(new { Id = Id });
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody]PublicSpot publicSpot)
+        public override IActionResult CreateSpotInfo(String name,String address)
         {
-            return Json(new ApiResult());
+
+            var tmp = new PublicSpot();
+
+            /*
+            tmp.Name = spot.Name;
+            tmp.Address = spot.Address;
+            tmp.Description = spot.Description;
+            tmp.ImageDir = spot.ImageDir;
+            */
+            tmp.Name = name;
+            tmp.Address = address;
+            this._context.PublicSpot.Add(tmp);
+            this._context.SaveChanges();
+            return Json(new { status = "success" });
         }
     }
 }
