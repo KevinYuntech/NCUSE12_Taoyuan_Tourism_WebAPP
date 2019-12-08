@@ -7,9 +7,10 @@ using Microsoft.EntityFrameworkCore;
 using MvcMovie.Data;
 using NCUSE12_Taoyuan_Tourism_WebAPP.Data;
 using NCUSE12_Taoyuan_Tourism_WebAPP.Models;
+using System.Security.Claims;
 
 namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot.CreateSpot
-{
+{using System.Security.Claims;
     public class CreatePublicSpotController : CreateSpotController
     {
     
@@ -33,6 +34,8 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot.CreateSpot
             tmp.Address = address;
             this._context.PublicSpot.Add(tmp);
             this._context.SaveChanges();
+
+           
             return Json(new { status = "success" });
         }
     }
