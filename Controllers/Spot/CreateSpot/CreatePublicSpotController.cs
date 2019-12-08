@@ -23,7 +23,7 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot.CreateSpot
         [HttpPost]
         public IActionResult Post([FromBody]PublicSpot publicSpot)
         {
-            return Json(new ResultJson());
+            return Json(new ApiResult());
         }
     }
 }

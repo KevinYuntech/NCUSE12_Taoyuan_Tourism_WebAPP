@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace NCUSE12_Taoyuan_Tourism_WebAPP.Models
 {
-    public class ResultJson
+    public class ApiResult
     {
         /// <summary>
         /// 執行成功與否
@@ -27,7 +27,7 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Models
         /// 資料本體
         /// </summary>
 
-        public ResultJson()
+        public ApiResult()
         {
             Code = "0000";
             Succ = true;
