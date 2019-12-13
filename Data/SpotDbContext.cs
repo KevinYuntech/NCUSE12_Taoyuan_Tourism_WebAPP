@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NCUSE12_Taoyuan_Tourism_WebAPP.Models;
+using NCUSE12_Taoyuan_Tourism_WebAPP.Models.Spot;
 using System;
 using System.Collections.Generic;
 using System.Linq;

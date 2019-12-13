@@ -1,6 +1,4 @@
-using System;
-
-namespace NCUSE12_Taoyuan_Tourism_WebAPP.Models
+namespace NCUSE12_Taoyuan_Tourism_WebAPP.Models.Spot
 {
     public class SpotModel
     {

@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using MvcMovie.Data;
 using NCUSE12_Taoyuan_Tourism_WebAPP.Data;
-using NCUSE12_Taoyuan_Tourism_WebAPP.Models;
-using System.Security.Claims;
 
 namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot.CreateSpot
-{using System.Security.Claims;
+{
+    using Microsoft.AspNetCore.Authorization;
+    using NCUSE12_Taoyuan_Tourism_WebAPP.Models.Spot;
+
+
+   
     public class CreatePublicSpotController : CreateSpotController
     {
     
@@ -19,20 +17,13 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot.CreateSpot
         }
 
         [HttpPost]
-        public override IActionResult CreateSpotInfo(String name,String address)
+        public override IActionResult CreateSpotInfo(SpotModel spotModel)
         {
 
-            var tmp = new PublicSpot();
-
-            /*
-            tmp.Name = spot.Name;
-            tmp.Address = spot.Address;
-            tmp.Description = spot.Description;
-            tmp.ImageDir = spot.ImageDir;
-            */
-            tmp.Name = name;
-            tmp.Address = address;
-            this._context.PublicSpot.Add(tmp);
+            var publicSpot = new PublicSpot();
+            publicSpot.Name = spotModel.Name;
+            publicSpot.Address = spotModel.Address;
+            this._context.PublicSpot.Add(publicSpot);
             this._context.SaveChanges();
 
            
