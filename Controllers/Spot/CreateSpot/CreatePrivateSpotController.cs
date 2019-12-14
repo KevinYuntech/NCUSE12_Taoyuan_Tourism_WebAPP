@@ -19,19 +19,10 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot.CreateSpot
         [HttpPost]
         public override IActionResult CreateSpotInfo(SpotModel spotModel)
         {
-            //[FromBody]PublicSpot publicSpot
+            
 
-            return Json(new { name = spotModel.Name });
+            return Json(new { message = "成功傳入" });
         }
-
-        [HttpPost]
-        public  IActionResult TestCreateSpotInfo([FromBody] dynamic requestData)
-        {
-            //[FromBody]PublicSpot publicSpot
-
-            return Json(new { spotModel = requestData.Name });
-        }
-
 
     }
 }

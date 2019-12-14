@@ -14,5 +14,7 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Models.Spot
         public string Description { get; set; }
 
         public string ImageDir { get; set; }
+
+        public String UserId { get; set; }
     }
 }
