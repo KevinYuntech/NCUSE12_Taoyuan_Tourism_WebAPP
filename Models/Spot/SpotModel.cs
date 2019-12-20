@@ -10,9 +10,10 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Models.Spot
         public string Name { get; set; }
 
         [Required]
-        [StringLength(8, ErrorMessage = "Address length can't be more than 8.")]
+        [StringLength(20, ErrorMessage = "Address length can't be more than 8.")]
         public string Address { get; set; }
-
+        [Required]
+        [StringLength(100, ErrorMessage = "Address length can't be more than 8.")]
         public string Description { get; set; } 
 
         public string ImageDir { get; set; }

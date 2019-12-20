@@ -1,39 +1,64 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-<script src="~/js/Home.js"></script>
-<section id="greeting_and_logout" style="margin-right:50px; margin-top:5px">
-    <div style="text-align:right">
-        歡迎XXX &nbsp
-        <button type="button" class="btn btn-danger">登出</button>
-    </div>
-</section>
-<br>
-<section id="choose_purpose" align="center">
-    <button type="button" class="btn btn-secondary btn-lg">
-        公開行程
-    </button>
-    <button type="button" class="btn btn-secondary btn-lg">
-        私人景點
-    </button>
-    <button type="button" class="btn btn-secondary btn-lg">
-        行程規劃
-    </button>
-    <button type="button" id = "addSpot" class="btn btn-secondary btn-lg">
-        新增景點
-    </button>
-</section>
-<br>
-<section id="search_bar" style="width: 40%; margin-left:30%;">
-    <div id="search">
+
+@section css {
+       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/index.css">
+}
+@section js {
+    <script src="~/js/index.js"></script>
+}
+    <section id="choose_purpose" align="center">
+        <button type="button" class="btn btn-secondary btn-view">
+          公開景點
+        </button>
+        <button type="button" class="btn btn-secondary btn-view">
+          私人景點
+        </button>
+  </section>
+    <br>
+    <section id="search_bar" style="width: 40%; margin-left:30%;">
+      <div id="search">
         <input id="search_input" class="form-control" type="text" placeholder="搜尋" aria-label="Search">
+        <button type="button" class="btn btn-secondary btn-ln">
+          搜尋
+        </button>
+      </div>
+    </section>
+    <br>
+     <div>
+       <button class="btn btn-info btn-lg" id="addplace">新增景點</button>
     </div>
-</section>
-<br>
-<section>
-    <div id="map-container-google-1" class="z-depth-1-half map-container" style="height: 500px;">
-        <iframe src="https://maps.google.com/maps?q=manhatan&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" style="border:0" allowfullscreen></iframe>
+    <div class="addplaceform" id="addplaceform" style="display: none">
+        <div class="addplaceclose">
+            <i class="far fa-times-circle fa-2x" onclick="addplaceclose()"></i>
+        </div>
+        <div class="place">
+          景點名稱 :
+          <input id="placeinput" class="placeinput" type="text">
+        </div>
+        <div class="address">
+          地址&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp:
+          <input id="addressinput" class="addressinput" type="text">
+        </div>
+        <div class="description">
+          <label for="des">描述:</label><br>
+          <textarea id="descriptionarea" rows="3" cols="26"></textarea>
+        </div>
+        <div class="choosephoto">
+          選擇照片:
+
+        </div>
+        <br><br>
+        <div id = "submit_info" class="submit">
+          <button>確認送出</button>
+        </div>
     </div>
-</section>
+    <p>
+    <div>
+      <button class="btn btn-info btn-lg">行程規劃</button>
+   </div>
 
 
