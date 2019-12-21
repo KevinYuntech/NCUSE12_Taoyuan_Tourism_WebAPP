@@ -43,6 +43,27 @@ $(document).ready(function () {
                 }
             });
     });
+
+    $('#add_itinerary').click(function (e) {
+        alert('新增行程');
+        let info = {
+            name : $('#placeinput').val(),
+            description : $('#descriptionarea').val(),
+            address : $('#addressinput').val(),
+        }
+        
+        $.ajax({
+            type: "post",
+            url: "/AddItinerary/AddItinerary",
+            data: info,
+            dataType: "json",
+            success: function (response) {
+                alert(response.status)
+                
+                alert("以新增數量"+response.message);
+            }
+        });
+});
 });
 
 
