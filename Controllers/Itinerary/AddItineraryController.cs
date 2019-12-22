@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NCUSE12_Taoyuan_Tourism_WebAPP.Extensions;
-using NCUSE12_Taoyuan_Tourism_WebAPP.Models.Itinerary;
 using NCUSE12_Taoyuan_Tourism_WebAPP.Models.Spot;
 
 namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Itinerary
@@ -15,32 +14,28 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Itinerary
         [HttpPost]
         public IActionResult AddItinerary(SpotModel spotModel)
         {
-            //創建初始ItineraryList
+            //取得 ItineraryList session
             //新增景點資料進session
             //將物件包呈object傳進json
-            //創建list儲存景點
+            //需判斷營業時間限制
+            List<SpotModel> ItineraryList = HttpContext.Session.GetComplexData<List<SpotModel>>("ItineraryList");
 
-            var ItineraryList = HttpContext.Session.GetObject<ItineraryModel>("ItineraryList");
             if(ItineraryList == null)
-            {
-                ItineraryModel itineraryModel = new ItineraryModel();
-                itineraryModel.add(spotModel);
-                HttpContext.Session.SetObject("ItineraryList", itineraryModel);
-                ItineraryList = itineraryModel;
-                return Json(new { status = "首次新增", message = Newtonsoft.Json.JsonConvert.SerializeObject(ItineraryList.GetListCount()) });
+            {   
+                List<SpotModel> tmp = new List<SpotModel>();
+                tmp.Add(spotModel);
+                HttpContext.Session.SetComplexData("ItineraryList", tmp);
+                return Json(new { status = "首次新增", message = tmp.Count() });
             }
             else
             {
-                ItineraryList.add(spotModel);
-                HttpContext.Session.SetObject("ItineraryList", ItineraryList);
-                
-                return Json(new { status = "再次新增", message = Newtonsoft.Json.JsonConvert.SerializeObject(ItineraryList.GetListCount()) });
+                ItineraryList.Add(spotModel);
+                HttpContext.Session.SetComplexData("ItineraryList", ItineraryList);
+                var tmp = HttpContext.Session.GetComplexData<List<SpotModel>>("ItineraryList");
+                return Json(new { status = "再次新增", message = tmp.Count() });
             }
 
-            
-
-            
-
         }
+
     }
 }

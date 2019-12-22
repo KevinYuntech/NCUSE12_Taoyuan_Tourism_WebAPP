@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using NCUSE12_Taoyuan_Tourism_WebAPP.Extensions;
 using NCUSE12_Taoyuan_Tourism_WebAPP.Models;
-using NCUSE12_Taoyuan_Tourism_WebAPP.Models.Itinerary;
 
 namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers
 {

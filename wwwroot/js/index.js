@@ -45,7 +45,7 @@ $(document).ready(function () {
     });
 
     $('#add_itinerary').click(function (e) {
-        alert('新增行程');
+        console.log('新增行程');
         let info = {
             name : $('#placeinput').val(),
             description : $('#descriptionarea').val(),
@@ -56,11 +56,12 @@ $(document).ready(function () {
             type: "post",
             url: "/AddItinerary/AddItinerary",
             data: info,
+            async: false,
             dataType: "json",
             success: function (response) {
                 alert(response.status)
                 
-                alert("以新增數量"+response.message);
+                alert("目前新增數量"+response.message);
             }
         });
 });

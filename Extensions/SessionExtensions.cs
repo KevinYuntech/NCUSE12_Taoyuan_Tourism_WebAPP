@@ -9,15 +9,19 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Extensions
 {
     public static class SessionExtensions
     {
-        public static void SetObject<T>(this ISession session, string key, T value)
+        public static T GetComplexData<T>(this ISession session, string key)
         {
-            session.SetString(key, JsonConvert.SerializeObject(value));
+            var data = session.GetString(key);
+            if (data == null)
+            {
+                return default(T);
+            }
+            return JsonConvert.DeserializeObject<T>(data);
         }
 
-        public static T GetObject<T>(this ISession session, string key)
+        public static void SetComplexData(this ISession session, string key, object value)
         {
-            var value = session.GetString(key);
-            return value == null ? default(T) : JsonConvert.DeserializeObject<T>(value);
+            session.SetString(key, JsonConvert.SerializeObject(value));
         }
     }
 }
