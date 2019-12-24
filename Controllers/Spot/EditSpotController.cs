@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 using NCUSE12_Taoyuan_Tourism_WebAPP.Data;
 using NCUSE12_Taoyuan_Tourism_WebAPP.Models;
 using NCUSE12_Taoyuan_Tourism_WebAPP.Models.Spot;
+using Newtonsoft.Json;
+using Microsoft.AspNetCore.Authorization;
 
 namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot
 {
+    [Authorize]
     public class EditSpotController : Controller
     {
         protected SpotDbContext _context;
@@ -21,23 +24,29 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot
         [HttpPut]
         public IActionResult EditSpot(PublicSpot publicSpot)
         {   
-            ResultModel resultModel;
-            String userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // 取得目前登入者user ID
-
             var tmp_publicSpot = _context.PublicSpot.SingleOrDefault(x => x.Id == publicSpot.Id);
-
-            if (tmp_publicSpot != null)
+            if (tmp_publicSpot == null)
             {
-                _context.Entry(tmp_publicSpot).CurrentValues.SetValues(publicSpot);
-                _context.SaveChanges(); 
-                resultModel = new ResultModel(true,"修改資料成功",publicSpot);
+                return Json(new { message = JsonConvert.SerializeObject(new ResultModel(false,"此景點資料為空",null)) });
+            }
+            else if (!ModelState.IsValid)
+            {
+                //驗證欄位
+                var  ErrorDataMessage = new
+                {
+                    // 取得所有錯誤欄位訊息
+                    ModelStateErrors = ModelState.Where(x => x.Value.Errors.Count > 0)
+                     .ToDictionary(k => k.Key, k => k.Value.Errors.Select(e => e.ErrorMessage).ToArray())
+                };
+                return Json(new { message = JsonConvert.SerializeObject(new ResultModel(false,"新增景點欄位格式有誤",ErrorDataMessage)) });
             }
             else
             {
-                resultModel = new ResultModel(false,"找不到此Model",null);
+                _context.Entry(tmp_publicSpot).CurrentValues.SetValues(publicSpot);
+                _context.SaveChanges(); 
+                
+                return Json(new { message = JsonConvert.SerializeObject(new ResultModel(true,"修改資料成功",publicSpot)) });
             }
-
-            return Json(new { message = resultModel });
         }
     }
 }

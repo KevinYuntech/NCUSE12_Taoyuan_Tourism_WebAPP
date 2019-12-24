@@ -5,6 +5,13 @@
     <UserSecretsId>aspnet-NCUSE12_Taoyuan_Tourism_WebAPP-1A931AAB-6CD3-4F51-B3E7-D2208CCB39E2</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Controllers\Spot\DeleteSpot\**" />
+    <Content Remove="Controllers\Spot\DeleteSpot\**" />
+    <EmbeddedResource Remove="Controllers\Spot\DeleteSpot\**" />
+    <None Remove="Controllers\Spot\DeleteSpot\**" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="AspNetCore.Http.Extensions" Version="1.0.1" />
@@ -16,11 +23,6 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <Folder Include="Controllers\Spot\DeleteSpot\" />
   </ItemGroup>
 
 </Project>

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using NCUSE12_Taoyuan_Tourism_WebAPP.Data;
 using NCUSE12_Taoyuan_Tourism_WebAPP.Models;
+using Newtonsoft.Json;
 
 namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot
 {
@@ -25,10 +26,10 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot
             IList result = this._context.PublicSpot.Where(x => x.Name == zipcode).ToList();
 
             if(result.Count != 0){
-                return Json(new { message = new ResultModel(true,"成功查詢一到多筆資料",result)});
+                return Json(new { message = JsonConvert.SerializeObject(new ResultModel(true,"成功查詢一到多筆資料",result)) });
             }
             else{
-                return Json(new { message =  new ResultModel(false,"找不到任何資料",null)});
+                return Json(new { message = JsonConvert.SerializeObject(new ResultModel(false,"找不到任何資料",null)) });
             }
             
         }
@@ -36,14 +37,14 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot
         [HttpGet]
         public  IActionResult SearchSpotById(int Id)
         {
-            //判斷景點id, 回傳該郵遞區號對應景點資料
+            //判斷景點id, 回傳該id對應景點資料
             var result = this._context.PublicSpot.SingleOrDefault(x => x.Id == Id);
 
             if(result != null){
-                return Json(new { message = new ResultModel(true,"成功查詢一筆資料",result)});
+                return Json(new { message = JsonConvert.SerializeObject(new ResultModel(true,"成功查詢一筆資料",result)) });
             }
             else{
-                return Json(new { message =  new ResultModel(false,"找不到任何資料",null)});
+                return Json(new { message = JsonConvert.SerializeObject(new ResultModel(false,"找不到任何資料",null)) });
             }
 
         }
