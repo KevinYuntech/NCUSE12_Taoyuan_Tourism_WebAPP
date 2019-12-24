@@ -31,7 +31,6 @@ $(document).ready(function () {
                 description : $('#descriptionarea').val(),
                 address : $('#addressinput').val(),
             }
-            console.log(info);
             
             $.ajax({
                 type: "post",
@@ -39,7 +38,9 @@ $(document).ready(function () {
                 data: info,
                 dataType: "json",
                 success: function (response) {
-                    alert(response.message);
+                    //parse json
+                    var returnedData = JSON.parse(response.message);
+                    alert(returnedData.StatusMessage);
                 }
             });
     });

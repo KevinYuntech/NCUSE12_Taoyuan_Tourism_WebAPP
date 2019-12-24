@@ -7,15 +7,15 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Models
 {
     public class ResultModel
     {
-        public bool Succ { get; set; }
+        public bool Status { get; set; }
 
         public String StatusMessage{get;set;}
         public Object Data{get;set;}
         public DateTime DataTime { get; set; }
 
-        public ResultModel(Boolean Succ,String StatusMessage,Object Data)
+        public ResultModel(Boolean Status,String StatusMessage,Object Data)
         {
-            this.Succ = Succ;
+            this.Status = Status;
             this.StatusMessage =StatusMessage;
             this.Data = Data;
             DataTime = DateTime.Now;
