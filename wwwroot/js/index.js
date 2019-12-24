@@ -35,7 +35,7 @@ $(document).ready(function () {
             
             $.ajax({
                 type: "post",
-                url: "CreatePublicSpot/CreateSpotInfo",
+                url: "CreateSpot/CreateSpotInfo",
                 data: info,
                 dataType: "json",
                 success: function (response) {

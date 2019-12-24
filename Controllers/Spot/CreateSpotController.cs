@@ -1,24 +1,27 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NCUSE12_Taoyuan_Tourism_WebAPP.Data;
+using NCUSE12_Taoyuan_Tourism_WebAPP.Models;
+using NCUSE12_Taoyuan_Tourism_WebAPP.Models.Spot;
 
-namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot.CreateSpot
+namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot
 {
-    using Microsoft.AspNetCore.Authorization;
-    using NCUSE12_Taoyuan_Tourism_WebAPP.Models.Spot;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Security.Claims;
-
-    public class CreatePublicSpotController : CreateSpotController
+    [Authorize]
+    public  class CreateSpotController : Controller
     {
-    
-        public CreatePublicSpotController(SpotDbContext context) : base(context)
+        protected SpotDbContext _context;
+        public CreateSpotController(SpotDbContext context)
         {
+            this._context = context;
         }
 
         [HttpPost]
-        public override IActionResult CreateSpotInfo(SpotModel spotModel)
+        public  IActionResult CreateSpotInfo(SpotModel spotModel)
         {
             //驗證輸入欄位正確性, 可抽象化
             //驗證傳入資料是否為空
@@ -52,4 +55,6 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot.CreateSpot
             return Json(new { message = "新增資料成功" });
         }
     }
-}
+
+
+    }
