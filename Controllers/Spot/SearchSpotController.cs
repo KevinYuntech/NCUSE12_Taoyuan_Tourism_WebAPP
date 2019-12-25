@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using NCUSE12_Taoyuan_Tourism_WebAPP.Data;
 using NCUSE12_Taoyuan_Tourism_WebAPP.Models;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Http;
 
 namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot
 {
@@ -18,7 +19,39 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot
         {
             this._context = context;
         }
+
+        [HttpGet]
+        public IActionResult SearchSpotPageByDistrict(string zipcode)
+        {   
+            try
+            {
+                HttpContext.Session.SetString("zipcode", zipcode);
+                return View();
+            }
+            catch (System.Exception)
+            {
+                return Json(new { message = JsonConvert.SerializeObject(new ResultModel(true,"查詢不到資料",null)) });  
+                throw;
+            }
+        }
         
+        [HttpGet]
+        public  IActionResult SearchSpotByDistrictSession()
+        {
+                //判斷郵遞區號session, 回傳該郵遞區號對應景點資料
+                try
+                {
+                    var zipcode = HttpContext.Session.GetString("zipcode");
+                    IList result = this._context.PublicSpot.Where(x => x.Name == zipcode).ToList();
+                    return Json(new { message = JsonConvert.SerializeObject(new ResultModel(true,"成功查詢一到多筆資料",result)) }); 
+                }
+                catch (System.Exception)
+                {
+                    return Json(new { message = JsonConvert.SerializeObject(new ResultModel(true,"查詢不到資料",null)) }); 
+                    throw;
+                }
+        }
+
         [HttpGet]
         public  IActionResult SearchSpotByDistrict(String zipcode)
         {
