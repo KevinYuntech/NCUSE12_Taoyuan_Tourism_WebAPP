@@ -12,26 +12,26 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Itinerary
     public class AddItineraryController : Controller
     {
         [HttpPost]
-        public IActionResult AddItinerary(SpotModel spotModel)
+        public IActionResult AddItinerary(PublicSpot publicSpot)
         {
             //取得 ItineraryList session
             //新增景點資料進session
             //將物件包呈object傳進json
             //需判斷營業時間限制
-            List<SpotModel> ItineraryList = HttpContext.Session.GetComplexData<List<SpotModel>>("ItineraryList");
+            List<PublicSpot> ItineraryList = HttpContext.Session.GetComplexData<List<PublicSpot>>("ItineraryList");
 
             if(ItineraryList == null)
             {   
-                List<SpotModel> tmp = new List<SpotModel>();
-                tmp.Add(spotModel);
+                List<PublicSpot> tmp = new List<PublicSpot>();
+                tmp.Add(publicSpot);
                 HttpContext.Session.SetComplexData("ItineraryList", tmp);
                 return Json(new { status = "首次新增", message = tmp.Count() });
             }
             else
             {
-                ItineraryList.Add(spotModel);
+                ItineraryList.Add(publicSpot);
                 HttpContext.Session.SetComplexData("ItineraryList", ItineraryList);
-                var tmp = HttpContext.Session.GetComplexData<List<SpotModel>>("ItineraryList");
+                var tmp = HttpContext.Session.GetComplexData<List<PublicSpot>>("ItineraryList");
                 return Json(new { status = "再次新增", message = tmp.Count() });
             }
 

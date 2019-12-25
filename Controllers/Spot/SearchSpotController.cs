@@ -21,16 +21,17 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot
         }
 
         [HttpGet]
-        public IActionResult SearchSpotPageByDistrict(string zipcode)
+        public IActionResult SearchSpotPageByDistrict(int Zipcode,string Zone)
         {   
             try
             {
-                HttpContext.Session.SetString("zipcode", zipcode);
+                HttpContext.Session.SetInt32("Zipcode", Zipcode);
+                HttpContext.Session.SetString("Zone", Zone);
                 return View();
             }
             catch (System.Exception)
             {
-                return Json(new { message = JsonConvert.SerializeObject(new ResultModel(true,"查詢不到資料",null)) });  
+                return Json(new { message = JsonConvert.SerializeObject(new ResultModel(false,"查詢不到資料",null)) });  
                 throw;
             }
         }
@@ -41,13 +42,14 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot
                 //判斷郵遞區號session, 回傳該郵遞區號對應景點資料
                 try
                 {
-                    var zipcode = HttpContext.Session.GetString("zipcode");
-                    IList result = this._context.PublicSpot.Where(x => x.Name == zipcode).ToList();
-                    return Json(new { message = JsonConvert.SerializeObject(new ResultModel(true,"成功查詢一到多筆資料",result)) }); 
+                    var Zipcode = HttpContext.Session.GetInt32("Zipcode");
+                    var Zone = HttpContext.Session.GetString("Zone");
+                    IList result = this._context.PublicSpot.Where(x => x.Zipcode == Zipcode).ToList();
+                    return Json(new { message = JsonConvert.SerializeObject(new ResultModel(true,"成功查詢一到多筆資料",result)),Zone = Zone }); 
                 }
                 catch (System.Exception)
                 {
-                    return Json(new { message = JsonConvert.SerializeObject(new ResultModel(true,"查詢不到資料",null)) }); 
+                    return Json(new { message = JsonConvert.SerializeObject(new ResultModel(false,"查詢不到資料",null)) }); 
                     throw;
                 }
         }

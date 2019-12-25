@@ -16,8 +16,6 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Data
 
         public DbSet<PublicSpot> PublicSpot { get; set; }
 
-        public DbSet<PrivateSpot> PrivateSpot { get; set; }
-
 
     }
 }

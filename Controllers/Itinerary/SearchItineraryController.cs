@@ -14,7 +14,7 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Itinerary
         {   
             //查詢現有景點行程
 
-            List<SpotModel> ItineraryList = HttpContext.Session.GetComplexData<List<SpotModel>>("ItineraryList");
+            List<PublicSpot> ItineraryList = HttpContext.Session.GetComplexData<List<PublicSpot>>("ItineraryList");
 
             return Json(new { message = ItineraryList});
           }

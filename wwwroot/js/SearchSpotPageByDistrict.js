@@ -8,10 +8,11 @@ $(document).ready(function () {
 
             let data = JSON.parse(response.message);
             let spotList = data.Data;
-
+            
+            $('#title').text(response.zone);
             for (let index = 0; index < spotList.length; index++) {
                 let spot_str = "<tr>" +
-                "<td>中壢區</td>"+
+                "<td>"+spotList[index].Zipcode+"</td>"+
                 "<td>" +spotList[index].Name+"</td>" +
                 "<td>" +spotList[index].Address+"</td>" +
                 "<td>" +spotList[index].Description+"</td>" +
