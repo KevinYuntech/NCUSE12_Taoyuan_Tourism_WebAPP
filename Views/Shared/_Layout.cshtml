@@ -6,7 +6,9 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <title>@ViewData["Title"] - 桃園旅遊網站</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/All.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/Nav.css" />
     @RenderSection("css", required: false)
     @RenderSection("js", required: false)
 </head>
@@ -14,7 +16,11 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">NCUSE12_Taoyuan_Tourism_WebAPP</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                     <div class="container">
+                <span class="webName h3 mx-1">室外桃園</span>
+                </div>
+                </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>

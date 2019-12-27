@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Reflection.Metadata.Ecma335;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ using NCUSE12_Taoyuan_Tourism_WebAPP.Data;
 using NCUSE12_Taoyuan_Tourism_WebAPP.Models;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Http;
+using NCUSE12_Taoyuan_Tourism_WebAPP.Models.Spot;
 
 namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot
 {
@@ -68,18 +70,24 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot
             }
             
         }
-
+        
         [HttpGet]
-        public  IActionResult SearchSpotById(int Id)
+        public  IActionResult SearchSpotPageById(int Id)
         {
             //判斷景點id, 回傳該id對應景點資料
             var result = this._context.PublicSpot.SingleOrDefault(x => x.Id == Id);
 
             if(result != null){
-                return Json(new { message = JsonConvert.SerializeObject(new ResultModel(true,"成功查詢一筆資料",result)) });
+
+                List<PublicSpot> list= new List<PublicSpot>();
+                list.Add(result);
+                var resultModel = new SpotListViewModel(true,"成功查詢一筆資料",list);
+                return View(resultModel);
             }
             else{
-                return Json(new { message = JsonConvert.SerializeObject(new ResultModel(false,"找不到任何資料",null)) });
+                List<PublicSpot> list= new List<PublicSpot>();
+                var resultModel =  new SpotListViewModel(false,"找不到任何資料",list);
+                return View(resultModel);
             }
 
         }
