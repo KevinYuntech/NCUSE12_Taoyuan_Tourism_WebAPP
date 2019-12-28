@@ -13,16 +13,22 @@ $(document).ready(function () {
             $('#title').text(response.zone);
             for (let index = 0; index < spotList.length; index++) {
                 let spot_str = "<tr>" +
-                "<td>"+spotList[index].Id+"</td>"+
+                "<td class='spot_id'>"+spotList[index].Id+"</td>"+
                 "<td>" +spotList[index].Name+"</td>" +
                 "<td>" +spotList[index].Address+"</td>" +
                 "<td>" +spotList[index].Description+"</td>" +
                 "<td>" +"<button>新增行程</button>"+"</td>" +
+                "<td>" +"<button class=view_spot_detail_info>查看詳細資料</button>"+"</td>"
                 "</tr>";
 
                 $('#SpotListTable').append(spot_str);
             }
-            
+
+            $('.view_spot_detail_info').click(function (e) { 
+                e.preventDefault();
+                let id = $(this).parent('td').parent('tr').find('.spot_id').text();
+                window.location = "SearchSpotPageById?Id="+id;
+            });            
         }
     });
 });
@@ -34,6 +40,11 @@ loadLoginUser();
 console.log(userId);
 
 $(document).ready(function () {
+
+    $('.view_spot_detail_info').click(function (e) { 
+        e.preventDefault();
+        alert('測試');
+    });
 
     $('#create_spot_btn').click(function () {
         $('.addplaceform').animate({
@@ -56,12 +67,22 @@ $(document).ready(function () {
 
     //send spot info to backend
     $('#submit_info').click(function (e) {
+        let Name = $('#placeinput').val();
+        let Zipcode = $('#placeinput').val();
+        let Address = $('#placeinput').val();
+        let Opentime = $('#placeinput').val();
+        let Description = $('#placeinput').val();
+        let Image = $('#placeinput').val();
+
             let info = {
-                name : $('#placeinput').val(),
-                description : $('#descriptionarea').val(),
-                address : $('#addressinput').val(),
+                Name : Name,
+                Zipcode : Zipcode,
+                Address : Address,
+                Opentime : Opentime,
+                Description : Description,
+                Image : Image,
             }
-            if(name.length && number.length && time.length && address.length&& description.length)
+            if(Name.length && Zipcode.length && Opentime.length && Address.length)
             {
                 $.ajax({
                     type: "post",
@@ -113,7 +134,7 @@ function loadLoginUser()
     $(document).ready(function () {
         $.ajax({
             type: "get",
-            url: "Account/GetLoginUser",
+            url: "~/Account/GetLoginUser",
             data: "",
             dataType: "json",
             async: false,
