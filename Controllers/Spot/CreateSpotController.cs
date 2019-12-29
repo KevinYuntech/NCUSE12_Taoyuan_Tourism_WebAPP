@@ -9,9 +9,13 @@ using NCUSE12_Taoyuan_Tourism_WebAPP.Data;
 using NCUSE12_Taoyuan_Tourism_WebAPP.Models;
 using NCUSE12_Taoyuan_Tourism_WebAPP.Models.Spot;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot
 {
+    
     [Authorize]
     public  class CreateSpotController : Controller
     {
@@ -45,6 +49,7 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot
             {
                 //新增資料
                 String userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // 取得目前登入者user ID
+                
                 this._context.PublicSpot.Add(publicSpot);
                 this._context.SaveChanges();
                 
@@ -52,6 +57,19 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot
             }
 
         }
+    
+        [HttpPost]
+        public ActionResult UploadSpotImg()
+        {   
+            var file = Request.Form.Files[0];
+
+            String filePath = "wwwroot//Img" + file.FileName;
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                file.CopyToAsync(stream);
+            }
+             return Json(new { message = JsonConvert.SerializeObject(new ResultModel(true,"新增景點資料成功",null)) });
+        }       
     }
 
 

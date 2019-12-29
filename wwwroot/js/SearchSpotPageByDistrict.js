@@ -66,13 +66,20 @@ $(document).ready(function () {
     });
 
     //send spot info to backend
-    $('#submit_info').click(function (e) {
+    $('#addplaceform').submit(function (e) {
+        e.preventDefault(); // avoid to execute the actual submit of the form
+        let create_status = false;
+
         let Name = $('#placeinput').val();
-        let Zipcode = $('#placeinput').val();
-        let Address = $('#placeinput').val();
-        let Opentime = $('#placeinput').val();
-        let Description = $('#placeinput').val();
-        let Image = $('#placeinput').val();
+        let Zipcode = $('#numberinput').val();
+        let Address = $('#addressinput').val();
+        let Opentime = $('#timearea').val();
+        let Description = $('#descriptionarea').val();
+        
+        let file = $('#uploadImage')[0].files[0] // 單個檔案
+        let formData = new FormData(this);
+        formData.append('image', file);
+        console.log(file);
 
             let info = {
                 Name : Name,
@@ -80,8 +87,8 @@ $(document).ready(function () {
                 Address : Address,
                 Opentime : Opentime,
                 Description : Description,
-                Image : Image,
             }
+
             if(Name.length && Zipcode.length && Opentime.length && Address.length)
             {
                 $.ajax({
@@ -92,9 +99,29 @@ $(document).ready(function () {
                     success: function (response) {
                         //parse json
                         var returnedData = JSON.parse(response.message);
-    
-                        alert(returnedData.StatusMessage);
+                        create_status = returnedData.StatusMessage;
+                       if (create_status === false) {
+                        alert(create_status);
                         console.log(returnedData.Data.ModelStateErrors);
+                       }
+                       else{
+                        
+                        $.ajax({
+                            type: "POST",
+                            url: "../CreateSpot/UploadSpotImg",
+                            data: formData,
+                            contentType: false,
+                            processData: false,
+                            mimeType: 'multipart/form-data',
+                            dataType: "JSON",
+                            success: function (response) {
+                                var returnedData = JSON.parse(response.message);
+                                create_status = returnedData.StatusMessage;
+                                console.log(create_status);
+
+                            }
+                        });
+                       }
                     }
                 });
             }
@@ -102,6 +129,7 @@ $(document).ready(function () {
             {
                 alert("尚有未輸入資料!!");
             } 
+
 
     });
 

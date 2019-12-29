@@ -25,10 +25,6 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Models.Spot
         [Required]
         public String Opentime { get; set; } 
 
-        
-        public DateTime Changetime { get; set; } 
-
-        
         public String Image { get; set; } 
 
 
