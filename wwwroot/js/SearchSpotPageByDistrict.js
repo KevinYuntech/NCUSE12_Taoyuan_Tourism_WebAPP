@@ -17,7 +17,7 @@ $(document).ready(function () {
                 "<td>" +spotList[index].Name+"</td>" +
                 "<td>" +spotList[index].Address+"</td>" +
                 "<td>" +spotList[index].Description+"</td>" +
-                "<td>" +"<button>新增行程</button>"+"</td>" +
+                "<td>" +"<button class=add_itinerary>新增行程</button>"+"</td>" +
                 "<td>" +"<button class=view_spot_detail_info>查看詳細資料</button>"+"</td>"
                 "</tr>";
 
@@ -28,9 +28,32 @@ $(document).ready(function () {
                 e.preventDefault();
                 let id = $(this).parent('td').parent('tr').find('.spot_id').text();
                 window.location = "SearchSpotPageById?Id="+id;
-            });            
+            });  
+            
+            $('.add_itinerary').click(function (e) {
+                let Name = $('#placeinput').val();
+                let Spot_Id = $(this).parent('td').parent('tr').find('.spot_id').text();
+                console.log(Spot_Id);
+                var spot_list = {
+                    Spot_Id : Spot_Id
+                };
+                $.ajax({
+                    type: "post",
+                    url: "../AddItinerary/AddItineraryBySpot_Id",
+                    data:  spot_list,
+                    async: false,
+                    dataType: "json",
+                    success: function (response) {
+                        alert(response.status)
+                        
+                        alert("目前新增數量"+response.message);
+                    }
+                });
+        });
         }
     });
+
+
 });
 
 //
@@ -47,10 +70,15 @@ $(document).ready(function () {
     });
 
     $('#create_spot_btn').click(function () {
-        $('.addplaceform').animate({
-            height: 'toggle',
-            opacity: 'toggle'
-        }, 'slow');
+        if(userId === null || userId === undefined|| userId === ''){
+            alert('請先登入');
+        }
+        else{
+            $('.addplaceform').animate({
+                height: 'toggle',
+                opacity: 'toggle'
+            }, 'slow');
+        }
     });
     
     $('#addplace').click(function (e) { 
@@ -87,6 +115,7 @@ $(document).ready(function () {
                 Address : Address,
                 Opentime : Opentime,
                 Description : Description,
+                UserId:userId
             }
 
             if(Name.length && Zipcode.length && Opentime.length && Address.length)
@@ -117,7 +146,7 @@ $(document).ready(function () {
                             success: function (response) {
                                 var returnedData = JSON.parse(response.message);
                                 create_status = returnedData.StatusMessage;
-                                console.log(create_status);
+                                alert(create_status);
 
                             }
                         });
@@ -132,28 +161,6 @@ $(document).ready(function () {
 
 
     });
-
-    $('#add_itinerary').click(function (e) {
-        console.log('新增行程');
-        let info = {
-            name : $('#placeinput').val(),
-            description : $('#descriptionarea').val(),
-            address : $('#addressinput').val(),
-        }
-        
-        $.ajax({
-            type: "post",
-            url: "/AddItinerary/AddItinerary",
-            data: info,
-            async: false,
-            dataType: "json",
-            success: function (response) {
-                alert(response.status)
-                
-                alert("目前新增數量"+response.message);
-            }
-        });
-});
 });
 
 
@@ -162,7 +169,7 @@ function loadLoginUser()
     $(document).ready(function () {
         $.ajax({
             type: "get",
-            url: "~/Account/GetLoginUser",
+            url: "../Account/GetLoginUser",
             data: "",
             dataType: "json",
             async: false,

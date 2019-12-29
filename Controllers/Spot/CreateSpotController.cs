@@ -48,11 +48,11 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot
             else
             {
                 //新增資料
-                String userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // 取得目前登入者user ID
                 
                 this._context.PublicSpot.Add(publicSpot);
                 this._context.SaveChanges();
                 
+                HttpContext.Session.SetInt32("creating_spot", publicSpot.Id);
                 return Json(new { message = JsonConvert.SerializeObject(new ResultModel(true,"新增景點資料成功",publicSpot)) });
             }
 
@@ -61,13 +61,23 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot
         [HttpPost]
         public ActionResult UploadSpotImg()
         {   
-            var file = Request.Form.Files[0];
+            //新增資料
+            var id = HttpContext.Session.GetInt32("creating_spot");
 
-            String filePath = "wwwroot//Img" + file.FileName;
+            var file = Request.Form.Files[0];
+            String filePath = "wwwroot//Img//SpotImg//" + file.FileName;
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
                 file.CopyToAsync(stream);
             }
+
+            var tmp_publicSpot = _context.PublicSpot.SingleOrDefault(x => x.Id == id);
+            
+
+            tmp_publicSpot.Image = filePath;
+            
+            _context.SaveChanges(); 
+
              return Json(new { message = JsonConvert.SerializeObject(new ResultModel(true,"新增景點資料成功",null)) });
         }       
     }
