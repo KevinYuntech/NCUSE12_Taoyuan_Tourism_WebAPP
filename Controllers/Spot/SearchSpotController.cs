@@ -30,6 +30,7 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot
             this._context = context;
         }
 
+        //區域景點清單
         [HttpGet]
         public IActionResult SearchSpotPageByDistrict(int Zipcode,string Zone)
         {   
@@ -79,6 +80,7 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot
             
         }
         
+        //詳細景點頁面
         [HttpGet]
         public  IActionResult SearchSpotPageById(int Id)
         {

@@ -1,0 +1,78 @@
+@model NCUSE12_Taoyuan_Tourism_WebAPP.Models.SpotListViewModel
+
+@{
+    ViewData["Title"] = "ViewUserSpot";
+}
+@section css {
+
+    <link rel="stylesheet" href="~/css/ViewUserSpotPage.css">
+}
+@section js {
+    <script src="~/js/ViewUserSpotPage.js"></script>
+}
+    <div class="container">
+        <div class="row justify-content-center">
+            <h1>我的景點</h1><br>
+        </div>
+    </div>
+    <div>
+        <div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col" width="15%">行政區</th>
+                        <th scope="col" width="20%">景點名稱</th>
+                        <th scope="col" width="40%">景點介紹</th>
+                        <th scope="col" width="15%">開放時間</th>
+                        <th scope="col" width="10%">編輯刪除</th>
+                    </tr>
+                </thead>
+
+                <tbody id="mySpot">
+                    @foreach (var item in Model.Data)
+                    {
+                    <tr> 
+                        <th scope="row">@item.Zipcode</th>
+                        <td>@item.Name</td>
+                        <td>@item.Description</td>
+                        <td>@item.Opentime</td>
+                        <td>
+                            <button type="button" class="btn btn-primary edit_btn" onclick="editSpot()">編輯</button>
+                            <button type="button" class="btn btn-danger" onclick="deleteSpot()">刪除</button>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <br><br>
+        <!--表單-->
+        <div class="addplaceform" id="EditPlaceform" style="display: none">
+            <h1>編輯景點</h1>
+            <div class="addplaceclose">
+                <i class="far fa-times-circle fa-2x" onclick="editPlaceClose()"></i>
+            </div>
+            <!--<img src="新增景點.jpg" width="15px"; height="15px">-->
+            <div class="place">
+                景點名稱 :<br>
+                <input id="placeinput" class="placeinput  form-control" type="text" maxlength="20">
+            </div>
+            <div class="time">
+                開放時間:<br>
+                <input id="time" class="timeinput form-control" type="text" maxlength="30">
+            </div>
+            <div class="description">
+                <label for="des">景點介紹:</label><br>
+                <textarea id="descriptionarea" rows="3" cols="26" maxlength="1000"></textarea>
+            </div>
+            <div class="choosephoto">
+                上傳照片:
+                <input accept="image/*" id="uploadImage" type="file">
+            </div>
+            <div class="submit">
+                <button id=submit_info>確認送出</button>
+            </div>
+        </div>
+        <p>
+            <div>
+            </div>
