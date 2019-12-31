@@ -10,12 +10,20 @@ using NCUSE12_Taoyuan_Tourism_WebAPP.Models;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Http;
 using NCUSE12_Taoyuan_Tourism_WebAPP.Models.Spot;
+using System.IO;
 
 namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot
 {
     public  class SearchSpotController : Controller
     {
         protected SpotDbContext _context;
+        private readonly static Dictionary<string, string> _contentTypes = new Dictionary<string, string>
+        {
+            {".png", "image/png"},
+            {".jpg", "image/jpeg"},
+            {".jpeg", "image/jpeg"},
+            {".gif", "image/gif"}
+        };
 
         public SearchSpotController(SpotDbContext context)
         {
@@ -91,6 +99,30 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot
             }
 
         }
+
+        
+        [HttpGet]
+        public  IActionResult SearchImageByName(String fileName)
+        {
+            if (string.IsNullOrEmpty(fileName))
+            {
+                return NotFound();
+            }
+            else
+            {
+                var path = "wwwroot\\Img\\SpotImg\\" + fileName;
+                var memoryStream = new MemoryStream();
+                using (var stream = new FileStream(path, FileMode.Open))
+                {
+                     stream.CopyToAsync(memoryStream);
+                }
+                memoryStream.Seek(0, SeekOrigin.Begin);
+
+                // 回傳檔案到 Client 需要附上 Content Type，否則瀏覽器會解析失敗。
+                return new FileStreamResult(memoryStream, _contentTypes[Path.GetExtension(path).ToLowerInvariant()]);
+            }
+        }
+        
 
     }
 }

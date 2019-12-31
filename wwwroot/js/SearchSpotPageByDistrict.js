@@ -9,47 +9,47 @@ $(document).ready(function () {
 
             let data = JSON.parse(response.message);
             let spotList = data.Data;
-            
+
             $('#title').text(response.zone);
             for (let index = 0; index < spotList.length; index++) {
                 let spot_str = "<tr>" +
-                "<td class='spot_id'>"+spotList[index].Id+"</td>"+
-                "<td>" +spotList[index].Name+"</td>" +
-                "<td>" +spotList[index].Address+"</td>" +
-                "<td>" +spotList[index].Description+"</td>" +
-                "<td>" +"<button class=add_itinerary>新增行程</button>"+"</td>" +
-                "<td>" +"<button class=view_spot_detail_info>查看詳細資料</button>"+"</td>"
+                    "<td class='spot_id'>" + spotList[index].Id + "</td>" +
+                    "<td>" + spotList[index].Name + "</td>" +
+                    "<td>" + spotList[index].Address + "</td>" +
+                    "<td>" + spotList[index].Description + "</td>" +
+                    "<td>" + "<button class=add_itinerary>新增行程</button>" + "</td>" +
+                    "<td>" + "<button class=view_spot_detail_info>查看詳細資料</button>" + "</td>"
                 "</tr>";
 
                 $('#SpotListTable').append(spot_str);
             }
 
-            $('.view_spot_detail_info').click(function (e) { 
+            $('.view_spot_detail_info').click(function (e) {
                 e.preventDefault();
                 let id = $(this).parent('td').parent('tr').find('.spot_id').text();
-                window.location = "SearchSpotPageById?Id="+id;
-            });  
-            
+                window.location = "SearchSpotPageById?Id=" + id;
+            });
+
             $('.add_itinerary').click(function (e) {
                 let Name = $('#placeinput').val();
                 let Spot_Id = $(this).parent('td').parent('tr').find('.spot_id').text();
                 console.log(Spot_Id);
                 var spot_list = {
-                    Spot_Id : Spot_Id
+                    Spot_Id: Spot_Id
                 };
                 $.ajax({
                     type: "post",
                     url: "../AddItinerary/AddItineraryBySpot_Id",
-                    data:  spot_list,
+                    data: spot_list,
                     async: false,
                     dataType: "json",
                     success: function (response) {
                         alert(response.status)
-                        
-                        alert("目前新增數量"+response.message);
+
+                        alert("目前新增數量" + response.message);
                     }
                 });
-        });
+            });
         }
     });
 
@@ -64,35 +64,38 @@ console.log(userId);
 
 $(document).ready(function () {
 
-    $('.view_spot_detail_info').click(function (e) { 
+    $('.view_spot_detail_info').click(function (e) {
         e.preventDefault();
         alert('測試');
     });
 
     $('#create_spot_btn').click(function () {
-        if(userId === null || userId === undefined|| userId === ''){
+        if (userId === null || userId === undefined || userId === '') {
             alert('請先登入');
-        }
-        else{
+        } else {
             $('.addplaceform').animate({
                 height: 'toggle',
                 opacity: 'toggle'
             }, 'slow');
         }
     });
-    
-    $('#addplace').click(function (e) { 
+    //無作用?
+    $('#addplace').click(function (e) {
 
-        
-        if(userId === null || userId === undefined|| userId === ''){
+
+        if (userId === null || userId === undefined || userId === '') {
             alert('請先登入');
-        }
-        else{
+        } else {
             console.log("pop a dialog");
             document.getElementById('addplaceform').style.display = "";
         }
     });
 
+    $('#view_Itneary_btn').click(function (e) { 
+        e.preventDefault();
+        window.location = "../SearchItinerary/MySearchItinerary";
+
+    });
     //send spot info to backend
     $('#addplaceform').submit(function (e) {
         e.preventDefault(); // avoid to execute the actual submit of the form
@@ -103,38 +106,36 @@ $(document).ready(function () {
         let Address = $('#addressinput').val();
         let Opentime = $('#timearea').val();
         let Description = $('#descriptionarea').val();
-        
+
         let file = $('#uploadImage')[0].files[0] // 單個檔案
         let formData = new FormData(this);
         formData.append('image', file);
         console.log(file);
 
-            let info = {
-                Name : Name,
-                Zipcode : Zipcode,
-                Address : Address,
-                Opentime : Opentime,
-                Description : Description,
-                UserId:userId
-            }
+        let info = {
+            Name: Name,
+            Zipcode: Zipcode,
+            Address: Address,
+            Opentime: Opentime,
+            Description: Description,
+            UserId: userId
+        }
 
-            if(Name.length && Zipcode.length && Opentime.length && Address.length)
-            {
-                $.ajax({
-                    type: "post",
-                    url: "../CreateSpot/CreateSpotInfo",
-                    data: info,
-                    dataType: "json",
-                    success: function (response) {
-                        //parse json
-                        var returnedData = JSON.parse(response.message);
-                        create_status = returnedData.StatusMessage;
-                       if (create_status === false) {
+        if (Name.length && Zipcode.length && Opentime.length && Address.length) {
+            $.ajax({
+                type: "post",
+                url: "../CreateSpot/CreateSpotInfo",
+                data: info,
+                dataType: "json",
+                success: function (response) {
+                    //parse json
+                    var returnedData = JSON.parse(response.message);
+                    create_status = returnedData.StatusMessage;
+                    if (create_status === false) {
                         alert(create_status);
                         console.log(returnedData.Data.ModelStateErrors);
-                       }
-                       else{
-                        
+                    } else {
+
                         $.ajax({
                             type: "POST",
                             url: "../CreateSpot/UploadSpotImg",
@@ -150,22 +151,19 @@ $(document).ready(function () {
 
                             }
                         });
-                       }
                     }
-                });
-            }
-            else
-            {
-                alert("尚有未輸入資料!!");
-            } 
+                }
+            });
+        } else {
+            alert("尚有未輸入資料!!");
+        }
 
 
     });
 });
 
 
-function loadLoginUser()
-{   
+function loadLoginUser() {
     $(document).ready(function () {
         $.ajax({
             type: "get",
@@ -178,7 +176,7 @@ function loadLoginUser()
                 console.log(userId);
             }
         });
-    
+
     });
 }
 
