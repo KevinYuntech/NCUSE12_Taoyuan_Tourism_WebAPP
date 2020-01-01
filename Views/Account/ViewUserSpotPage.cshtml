@@ -20,6 +20,7 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
+                        <th scope="col" width="15%">景點編號</th>
                         <th scope="col" width="15%">行政區</th>
                         <th scope="col" width="20%">景點名稱</th>
                         <th scope="col" width="40%">景點介紹</th>
@@ -32,13 +33,14 @@
                     @foreach (var item in Model.Data)
                     {
                     <tr> 
-                        <th scope="row">@item.Zipcode</th>
+                        <th scope="row" class="Id">@item.Id</th>
+                        <td>@item.Zipcode</td>
                         <td>@item.Name</td>
                         <td>@item.Description</td>
                         <td>@item.Opentime</td>
                         <td>
-                            <button type="button" class="btn btn-primary edit_btn" onclick="editSpot()">編輯</button>
-                            <button type="button" class="btn btn-danger" onclick="deleteSpot()">刪除</button>
+                            <button type="button" class="btn btn-primary edit_btn">編輯</button>
+                            <button type="button" class="btn btn-danger delete_btn">刪除</button>
                         </td>
                     </tr>
                     }
@@ -47,12 +49,16 @@
         </div>
         <br><br>
         <!--表單-->
-        <div class="addplaceform" id="EditPlaceform" style="display: none">
+        <form class="addplaceform" id="EditPlaceform" style="display: none">
             <h1>編輯景點</h1>
             <div class="addplaceclose">
                 <i class="far fa-times-circle fa-2x" onclick="editPlaceClose()"></i>
             </div>
             <!--<img src="新增景點.jpg" width="15px"; height="15px">-->
+            <div class="place">
+                景點編號 :<br>
+                <input id="placeid" class="placeid  form-control" type="text" maxlength="20">
+            </div>
             <div class="place">
                 景點名稱 :<br>
                 <input id="placeinput" class="placeinput  form-control" type="text" maxlength="20">
@@ -70,9 +76,9 @@
                 <input accept="image/*" id="uploadImage" type="file">
             </div>
             <div class="submit">
-                <button id=submit_info>確認送出</button>
+                <button type="submit" id=submit_info>確認送出</button>
             </div>
-        </div>
+        </form>
         <p>
             <div>
             </div>

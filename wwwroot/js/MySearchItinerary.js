@@ -25,13 +25,10 @@ function check() {
 $(document).ready(function () {
   $.ajax({
     type: "get",
-    url: "../SearchItinerary/GetCurrentItineraryList",
+    url: "/SearchItinerary/GetCurrentItineraryList",
     data: "",
     dataType: "json",
     success: function (response) {
-      
-
-
       $('#itinerary_count').text(response.message.length);
     }
   });

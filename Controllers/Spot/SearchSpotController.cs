@@ -80,7 +80,7 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot
             
         }
         
-        //詳細景點頁面
+        //單一景點頁面
         [HttpGet]
         public  IActionResult SearchSpotPageById(int Id)
         {
@@ -102,27 +102,39 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot
 
         }
 
-        
+        //單一景點json
         [HttpGet]
-        public  IActionResult SearchImageByName(String fileName)
+        public  IActionResult SearchSpotById(int Id)
         {
-            if (string.IsNullOrEmpty(fileName))
-            {
-                return NotFound();
+            //判斷景點id, 回傳該id對應景點資料
+            var result = this._context.PublicSpot.SingleOrDefault(x => x.Id == Id);
+
+            if(result != null){
+                return Json(new { message = JsonConvert.SerializeObject(new ResultModel(true,"成功查詢一到多筆資料",result)) });
             }
-            else
-            {
-                var path = "wwwroot\\Img\\SpotImg\\" + fileName;
-                var memoryStream = new MemoryStream();
-                using (var stream = new FileStream(path, FileMode.Open))
+            else{
+                return Json(new { message = JsonConvert.SerializeObject(new ResultModel(false,"找不到任何資料",null)) });
+            }
+
+        }
+
+
+        [HttpGet]
+        public  IActionResult SearchImageBySpotId(int SpotId)
+        {
+                try
                 {
-                     stream.CopyToAsync(memoryStream);
-                }
-                memoryStream.Seek(0, SeekOrigin.Begin);
+                var spot = this._context.PublicSpot.SingleOrDefault(x => x.Id == SpotId);
+                var path = spot.Image;
 
                 // 回傳檔案到 Client 需要附上 Content Type，否則瀏覽器會解析失敗。
-                return new FileStreamResult(memoryStream, _contentTypes[Path.GetExtension(path).ToLowerInvariant()]);
-            }
+                return Json(new { message =  path}); 
+                }
+                catch (System.Exception)
+                {
+                    
+                    throw;
+                }
         }
         
 

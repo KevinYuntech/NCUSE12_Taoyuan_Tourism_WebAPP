@@ -1,32 +1,84 @@
-//新增景點
-$('#addplace').click(function(e) {
 
 
-    if (userId === null || userId === undefined || userId === '') {
-        alert('請先登入');
-    } else {
-        console.log("pop a dialog");
-        document.getElementById('addplaceform').style.display = "";
-    }
-});
+//觸發編輯景點功能
+$(document).ready(function () {
+    $('.edit_btn').click(function (e) { 
+        e.preventDefault();
+        document.getElementById("EditPlaceform").style.display = "block";
 
-//確認送出
+        //抓取當前景點id
+        let spot_id = $(this).parent('td').parent('tr').find('.Id').text();
+        
+        //ajax傳id 覆蓋dialog值
+        $.ajax({
+            type: "get",
+            url: "../SearchSpot/SearchSpotById",
+            data: {"id":spot_id},
+            dataType: "json",
+            async: false,
+            success: function(response) {
+                let data = JSON.parse(response.message);
+                let spot = data.Data;
+                $('#placeid').val(spot.Id);
+                $('#placeinput').val(spot.Name);
+                $('#time').val(spot.Opentime);
+                $('#descriptionarea').val(spot.Description);
+                
+            }
+        });
+
+
+    });
+
+    $('.delete_btn').click(function (e) { 
+        e.preventDefault();
+       
+        if(confirm("確定要刪除嗎?"))
+        {
+            //抓取當前景點id
+            let spot_id = $(this).parent('td').parent('tr').find('.Id').text();
+
+            //ajax傳id 覆蓋dialog值
+            $.ajax({
+                type: "delete",
+                url: "../DeleteSpot/DeleteSpotById",
+                data: {"id":spot_id},
+                dataType: "json",
+                async: false,
+                success: function(response) {
+                    alert(response.message.StatusMessage);  
+                }
+            });
+        }
+        else
+        {
+            alert("已經取消了刪除操作");      
+        }    
+        
+    });
+
+    //確認送出
 $('#submit_info').click(function(e) {
+    e.preventDefault();
+    alert('送出');
+    //須提供Address Zipcode Opentime
     let info = {
+        id:$('#placeid').val(),
         name: $('#placeinput').val(),
-        time: $('#timeinput').val(),
         description: $('#descriptionarea').val(),
-
+        Address: $('#placeinput').val(),
+        Zipcode:123,
+        Opentime: $('#placeinput').val(),
+        UserId:userId
     }
-    console.log(info);
     //思筠
-    if (name.length && description.length && address.length) {
+    if (true) {
         //利用ajax將使用者的資訊post到後端(api)
         //將後端的回傳的response給顯示在response_text中
 
         $.ajax({
-            type: "post",
-            url: "",
+            type: "put",
+            url: "../EditSpot/EditSpot",
             data: info,
             dataType: "json",
             success: function(response) {
@@ -43,14 +95,9 @@ $('#submit_info').click(function(e) {
     //思筠
 
 });
-    
-
-$(document).ready(function () {
-    $('.edit_btn').click(function (e) { 
-        e.preventDefault();
-        document.getElementById("EditPlaceform").style.display = "block";
-    });
 });
+
+
 
 function editSpot() {
 
@@ -60,21 +107,4 @@ function editSpot() {
 function editPlaceClose() {
     console.log("close a dialog");
     document.getElementById('EditPlaceform').style.display = "none";
-}
-
-function loadLoginUser() {
-    $(document).ready(function() {
-        $.ajax({
-            type: "get",
-            url: "Account/GetLoginUser",
-            data: "",
-            dataType: "json",
-            async: false,
-            success: function(response) {
-                userId = response.userId;
-                console.log(userId);
-            }
-        });
-
-    });
 }

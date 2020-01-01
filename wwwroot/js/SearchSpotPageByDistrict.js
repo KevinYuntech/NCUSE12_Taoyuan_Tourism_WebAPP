@@ -31,24 +31,29 @@ $(document).ready(function () {
             });
 
             $('.add_itinerary').click(function (e) {
-                let Name = $('#placeinput').val();
-                let Spot_Id = $(this).parent('td').parent('tr').find('.spot_id').text();
-                console.log(Spot_Id);
-                var spot_list = {
-                    Spot_Id: Spot_Id
-                };
-                $.ajax({
-                    type: "post",
-                    url: "../AddItinerary/AddItineraryBySpot_Id",
-                    data: spot_list,
-                    async: false,
-                    dataType: "json",
-                    success: function (response) {
-                        alert(response.status)
-
-                        alert("目前新增數量" + response.message);
-                    }
-                });
+                if (userId === null || userId === undefined || userId === '') {
+                    window.location = "../Identity/Account/Login"
+                }
+                else{
+                    let Name = $('#placeinput').val();
+                    let Spot_Id = $(this).parent('td').parent('tr').find('.spot_id').text();
+                    console.log(Spot_Id);
+                    var spot_list = {
+                        Spot_Id: Spot_Id
+                    };
+                    $.ajax({
+                        type: "post",
+                        url: "../AddItinerary/AddItineraryBySpot_Id",
+                        data: spot_list,
+                        async: false,
+                        dataType: "json",
+                        success: function (response) {
+                            alert(response.status)
+    
+                            alert("目前新增數量" + response.message);
+                        }
+                    });
+                }
             });
         }
     });
@@ -56,45 +61,19 @@ $(document).ready(function () {
 
 });
 
-//
-//load current user status
-let userId;
-loadLoginUser();
-console.log(userId);
+
 
 $(document).ready(function () {
 
-    $('.view_spot_detail_info').click(function (e) {
-        e.preventDefault();
-        alert('測試');
-    });
-
     $('#create_spot_btn').click(function () {
         if (userId === null || userId === undefined || userId === '') {
-            alert('請先登入');
+            window.location = "../Identity/Account/Login"
         } else {
             $('.addplaceform').animate({
                 height: 'toggle',
                 opacity: 'toggle'
             }, 'slow');
         }
-    });
-    //無作用?
-    $('#addplace').click(function (e) {
-
-
-        if (userId === null || userId === undefined || userId === '') {
-            alert('請先登入');
-        } else {
-            console.log("pop a dialog");
-            document.getElementById('addplaceform').style.display = "";
-        }
-    });
-
-    $('#view_Itneary_btn').click(function (e) { 
-        e.preventDefault();
-        window.location = "../SearchItinerary/MySearchItinerary";
-
     });
     //send spot info to backend
     $('#addplaceform').submit(function (e) {
@@ -160,25 +139,18 @@ $(document).ready(function () {
 
 
     });
+
+    $('#view_Itneary_btn').click(function (e) { 
+        e.preventDefault();
+        
+        if (userId === null || userId === undefined || userId === '') {
+            window.location = "/Identity/Account/Login"
+        }
+        else{
+            window.location = "/SearchItinerary/MySearchItinerary";
+        }
+    });    
 });
-
-
-function loadLoginUser() {
-    $(document).ready(function () {
-        $.ajax({
-            type: "get",
-            url: "../Account/GetLoginUser",
-            data: "",
-            dataType: "json",
-            async: false,
-            success: function (response) {
-                userId = response.userId;
-                console.log(userId);
-            }
-        });
-
-    });
-}
 
 
 

@@ -1,13 +1,15 @@
 $(document).ready(function () {
-   console.log("123");
+    $('#spot_id').hide();
 
    $.ajax({
-       type: "get",
-       url: "../SearchSpot/SearchImageByName",
-       data: {"fileName":"下載.jpg"},
-       dataType: "dataType",
+       type: "GET",
+       url: "/SearchSpot/SearchImageBySpotId",
+       data: {SpotId:$('#spot_id').text()},
+       dataType: 'json',
+       async: true,
        success: function (response) {
-            $("#spot_image").attr("src", response);
+        let path = response.message.replace('wwwroot','')
+        $("#spot_image").attr("src",path);
        }
    });
     
