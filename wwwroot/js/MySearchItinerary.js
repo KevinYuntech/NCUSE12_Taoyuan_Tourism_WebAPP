@@ -1,25 +1,12 @@
 var min=0
-function newadd() {
-  
-  var tab=document.getElementById('main');
-  var row=tab.insertRow(min+1)
-  row.innerHTML+='<td><form><select name="YourLocation"><option value="Taipei">台北</option><option value="Taoyuan">桃園</option><option value="Hsinchu">新竹</option><option value="Miaoli">苗栗</option></select></form></td><td>新增02</td><td>新增03</td><td><input type="time" id="appt" name="appt" required>~<input type="time" id="appt" name="appt" required></td>';
-  min++;
 
-}
 function delete1() {
   //刪除最後一個
   document.getElementById("main").deleteRow(min);
   min--;
 
 }
-function check() {
-  if (window.confirm('是否要排序時間並儲存行程?')) {
-    document.frm.submit();
-  } else {
-    return false;
-  }
-}
+
 
 
 $(document).ready(function () {
@@ -29,8 +16,62 @@ $(document).ready(function () {
     data: "",
     dataType: "json",
     success: function (response) {
-      $('#itinerary_count').text(response.message.length);
+      console.log(response.message.length);
+      
+      for(let i = 0; i<= response.message.length;i++)
+      {
+        $.ajax({
+          type: "GET",
+          url: "/SearchSpot/SearchSpotById",
+          data: {"id":response.message[i]},
+          dataType: "JSON",
+          success: function (response) {
+            var returnedData = JSON.parse(response.message);
+            let data = returnedData.Data;
+            let spot_str = "<tr>" +
+            "<td>" + data.Name + "</td>" +
+            "<td>" + data.Address + "</td>" +
+            "<td>" + data.Opentime + "</td>" +
+            '<td><input type="datetime-local" id="appt" name="appt" required>~<input type="datetime-local" id="appt" name="appt" required> <button id="b" onclick="delete1(this.id);">刪除</button></td>' +
+        "</tr>";
+
+        $('#main').append(spot_str);
+
+            console.log(returnedData.Data);
+          }
+        });
+      }
     }
   });
 });
+
+var min=0;
+
+function takeScreenShot() {
+    var width22 = document.getElementById("needdownload").clientWidth;
+    var height22 = document.getElementById("needdownload").clientHeight;
+
+    html2canvas(document.getElementById("needdownload"), {
+        onrendered: function (canvas) {
+            var tempcanvas=document.createElement('canvas');
+            tempcanvas.width=width22;
+            tempcanvas.height=height22;
+            var context=tempcanvas.getContext('2d');
+            context.drawImage(canvas,0,0,tempcanvas.width,tempcanvas.height);
+            var link=document.createElement("a");
+
+            link.href=tempcanvas.toDataURL('image/jpg');   //function blocks CORS
+            link.download = 'screenshot.jpg';
+            link.click();
+        }
+    });
+}
+
+
+function delete1(x) {
+  if(min>0){
+    min--;
+  }
+  document.getElementById("main").deleteRow(x);
+}
 

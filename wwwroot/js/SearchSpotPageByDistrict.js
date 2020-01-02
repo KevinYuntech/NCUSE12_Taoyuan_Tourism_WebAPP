@@ -1,4 +1,8 @@
 //init loading spot list
+
+let _Zone = "";
+let _Zipcode = "";
+
 $(document).ready(function () {
     $.ajax({
         type: "GET",
@@ -11,6 +15,8 @@ $(document).ready(function () {
             let spotList = data.Data;
 
             $('#title').text(response.zone);
+            _Zone = response.zone;
+            console.log(_Zone);
             for (let index = 0; index < spotList.length; index++) {
                 let spot_str = "<tr>" +
                     "<td class='spot_id'>" + spotList[index].Id + "</td>" +
@@ -22,6 +28,7 @@ $(document).ready(function () {
                 "</tr>";
 
                 $('#SpotListTable').append(spot_str);
+                _Zipcode = spotList[index].Zipcode;
             }
 
             $('.view_spot_detail_info').click(function (e) {
@@ -32,7 +39,7 @@ $(document).ready(function () {
 
             $('.add_itinerary').click(function (e) {
                 if (userId === null || userId === undefined || userId === '') {
-                    window.location = "../Identity/Account/Login"
+                    window.location = "/Identity/Account/Login"
                 }
                 else{
                     let Name = $('#placeinput').val();
@@ -43,7 +50,7 @@ $(document).ready(function () {
                     };
                     $.ajax({
                         type: "post",
-                        url: "../AddItinerary/AddItineraryBySpot_Id",
+                        url: "/AddItinerary/AddItineraryBySpot_Id",
                         data: spot_list,
                         async: false,
                         dataType: "json",
@@ -67,12 +74,15 @@ $(document).ready(function () {
 
     $('#create_spot_btn').click(function () {
         if (userId === null || userId === undefined || userId === '') {
-            window.location = "../Identity/Account/Login"
+            window.location = "/Identity/Account/Login"
         } else {
             $('.addplaceform').animate({
                 height: 'toggle',
                 opacity: 'toggle'
             }, 'slow');
+
+            $('#numberinput').val(_Zipcode);
+            $('#addressinput').val('桃園市' + _Zone);
         }
     });
     //send spot info to backend
@@ -114,22 +124,31 @@ $(document).ready(function () {
                         alert(create_status);
                         console.log(returnedData.Data.ModelStateErrors);
                     } else {
+                        if(!(file === null || file === '' || file === 'undefined'))
+                        {
+                            $.ajax({
+                                type: "POST",
+                                url: "../CreateSpot/UploadSpotImg",
+                                data: formData,
+                                contentType: false,
+                                processData: false,
+                                mimeType: 'multipart/form-data',
+                                dataType: "JSON",
+                                success: function (response) {
+                                    var returnedData = JSON.parse(response.message);
+                                    create_status = returnedData.StatusMessage;
+                                    alert(create_status);
+                                    window.location.reload();
+                                },
+                                error : function(response) { 
+                                    alert(response); 
+                                } 
+                            });
+                        }
+                        else{
+                            alert('新增成功'); 
+                        }
 
-                        $.ajax({
-                            type: "POST",
-                            url: "../CreateSpot/UploadSpotImg",
-                            data: formData,
-                            contentType: false,
-                            processData: false,
-                            mimeType: 'multipart/form-data',
-                            dataType: "JSON",
-                            success: function (response) {
-                                var returnedData = JSON.parse(response.message);
-                                create_status = returnedData.StatusMessage;
-                                alert(create_status);
-
-                            }
-                        });
                     }
                 }
             });

@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $('#spot_id').hide();
-
+    
    $.ajax({
        type: "GET",
        url: "/SearchSpot/SearchImageBySpotId",
@@ -8,8 +8,9 @@ $(document).ready(function () {
        dataType: 'json',
        async: true,
        success: function (response) {
+        console.log(response.message);
         let path = response.message.replace('wwwroot','')
-        $("#spot_image").attr("src",path);
+        $("#spot_image").attr("src",response.message);
        }
    });
     

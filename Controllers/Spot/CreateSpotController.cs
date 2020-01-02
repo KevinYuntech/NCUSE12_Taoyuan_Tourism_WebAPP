@@ -65,7 +65,7 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot
             var id = HttpContext.Session.GetInt32("creating_spot");
 
             var file = Request.Form.Files[0];
-            String filePath = "wwwroot//Img//SpotImg//" + file.FileName;
+            String filePath = "wwwroot/Img/SpotImg/" + file.FileName;
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
                 file.CopyToAsync(stream);

@@ -1,43 +1,39 @@
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8" />
-<title>行程規劃</title>
-<!--商品列表樣式表-->
-<link rel="stylesheet" type="text/css" href="../css/index.css" rel="external nofollow" />
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
-<link rel="stylesheet" href="MySearchItinerary.css">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<script type="text/javascript" src="jquery.js"></script>
+@{
+    ViewData["Title"] = "MySearchItinerary";
+}
+@section css {
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+}
+@section js {
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 <script src="~/js/MySearchItinerary.js"></script>
-<!--cookie操作的js庫-->
-<!--<script src="../js/cookie.js" type="text/javascript" charset="utf-8"></script>-->
+}
 
-</head>
 <body>
 <div class="container">
 <h1 align="center">行程規劃</h1>
-<div style="float:left" class="mycar">
-<a href="cart.html" rel="external nofollow" >口袋名單數量</a><i id="itinerary_count">0</i>
-</div>
-<div style="float:right" >
-<form align="right" name="frm" method="post" action="vvc.html">
-    <input type="button" onclick="check();" value="規劃完成" />
-</form>
-</div><br>
 
-<div  align="center" class="list">
+<div style="float:right" >
+<input type="button" onclick="takeScreenShot();" value="規劃完成" />
+</div>
+
+
+
+<div  align="center" class="list" id="needdownload">
 <table width="100%" border="1" id="main">
 　<tr>
-　<td width="20%">景點名稱</td>
+　<td width="15%">景點名稱</td>
 　<td width="30%">地址</td>
-  <td width="30%">介紹</td>
-  <td width="20%">時間</td>
+  <td width="30%">營業時間</td>
+  <td width="25%">時間</td>
 　</tr>
 </table>
+</div>
 
-<button onclick="newadd()">新增</button><button onclick="delete1()">刪除</button>
-
+</div>
 </body>
-</html>

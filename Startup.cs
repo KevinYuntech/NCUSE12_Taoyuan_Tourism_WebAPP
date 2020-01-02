@@ -102,6 +102,7 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
+            app.UseDefaultFiles();
             app.UseStaticFiles();
 
             app.UseRouting();
