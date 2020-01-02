@@ -1,4 +1,5 @@
-﻿using System.Reflection.Metadata.Ecma335;
+﻿using System.Net;
+using System.Reflection.Metadata.Ecma335;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ using Newtonsoft.Json;
 using Microsoft.AspNetCore.Http;
 using NCUSE12_Taoyuan_Tourism_WebAPP.Models.Spot;
 using System.IO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot
 {
@@ -80,6 +82,7 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot
             
         }
         
+        //[Authorize (Roles = "Admin")]
         //單一景點頁面
         [HttpGet]
         public  IActionResult SearchSpotPageById(int Id)
@@ -102,6 +105,7 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot
 
         }
 
+        
         //單一景點json
         [HttpGet]
         public  IActionResult SearchSpotById(int Id)
