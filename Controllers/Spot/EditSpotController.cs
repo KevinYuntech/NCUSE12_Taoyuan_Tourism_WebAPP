@@ -24,6 +24,8 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot
         [HttpPut]
         public IActionResult EditSpot(PublicSpot publicSpot)
         {   
+            try
+            {
             var tmp_publicSpot = _context.PublicSpot.SingleOrDefault(x => x.Id == publicSpot.Id);
             if (tmp_publicSpot == null)
             {
@@ -38,7 +40,7 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot
                     ModelStateErrors = ModelState.Where(x => x.Value.Errors.Count > 0)
                      .ToDictionary(k => k.Key, k => k.Value.Errors.Select(e => e.ErrorMessage).ToArray())
                 };
-                return Json(new { message = JsonConvert.SerializeObject(new ResultModel(false,"新增景點欄位格式有誤",ErrorDataMessage)) });
+                return Json(new { message = JsonConvert.SerializeObject(new ResultModel(false,"欄位格式有誤",ErrorDataMessage)) });
             }
             else
             {
@@ -46,7 +48,13 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot
                 _context.SaveChanges(); 
                 
                 return Json(new { message = JsonConvert.SerializeObject(new ResultModel(true,"修改資料成功",publicSpot)) });
+            }                
             }
+            catch (System.Exception)
+            {
+                throw;
+            }
+
         }
     }
 }

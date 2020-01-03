@@ -6,12 +6,13 @@ $(document).ready(function () {
        url: "/SearchSpot/SearchImageBySpotId",
        data: {SpotId:$('#spot_id').text()},
        dataType: 'json',
-       async: true,
+       async: false,
        success: function (response) {
         console.log(response.message);
-        let path = response.message.replace('wwwroot','')
         $("#spot_image").attr("src",response.message);
        }
+
+      
    });
     
 });

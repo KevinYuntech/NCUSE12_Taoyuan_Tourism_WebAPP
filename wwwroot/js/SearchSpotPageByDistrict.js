@@ -21,8 +21,10 @@ $(document).ready(function () {
                 let spot_str = "<tr>" +
                     "<td class='spot_id'>" + spotList[index].Id + "</td>" +
                     "<td>" + spotList[index].Name + "</td>" +
+                    "<td>" + spotList[index].Zipcode + "</td>" +
                     "<td>" + spotList[index].Address + "</td>" +
                     "<td>" + spotList[index].Description + "</td>" +
+                    "<td>" + spotList[index].Opentime + "</td>" +
                     "<td>" + "<button class=add_itinerary>新增行程</button>" + "</td>" +
                     "<td>" + "<button class=view_spot_detail_info>查看詳細資料</button>" + "</td>"
                 "</tr>";
@@ -95,11 +97,7 @@ $(document).ready(function () {
         let Address = $('#addressinput').val();
         let Opentime = $('#timearea').val();
         let Description = $('#descriptionarea').val();
-
-        let file = $('#uploadImage')[0].files[0] // 單個檔案
-        let formData = new FormData(this);
-        formData.append('image', file);
-        console.log(file);
+        let Image = $('#image').val();
 
         let info = {
             Name: Name,
@@ -107,49 +105,24 @@ $(document).ready(function () {
             Address: Address,
             Opentime: Opentime,
             Description: Description,
-            UserId: userId
+            UserId: userId,
+            Image:Image
         }
 
         if (Name.length && Zipcode.length && Opentime.length && Address.length) {
             $.ajax({
                 type: "post",
-                url: "../CreateSpot/CreateSpotInfo",
+                url: "/CreateSpot/CreateSpotInfo",
                 data: info,
                 dataType: "json",
                 success: function (response) {
                     //parse json
                     var returnedData = JSON.parse(response.message);
                     create_status = returnedData.StatusMessage;
-                    if (create_status === false) {
-                        alert(create_status);
-                        console.log(returnedData.Data.ModelStateErrors);
-                    } else {
-                        if(!(file === null || file === '' || file === 'undefined'))
-                        {
-                            $.ajax({
-                                type: "POST",
-                                url: "../CreateSpot/UploadSpotImg",
-                                data: formData,
-                                contentType: false,
-                                processData: false,
-                                mimeType: 'multipart/form-data',
-                                dataType: "JSON",
-                                success: function (response) {
-                                    var returnedData = JSON.parse(response.message);
-                                    create_status = returnedData.StatusMessage;
-                                    alert(create_status);
-                                    window.location.reload();
-                                },
-                                error : function(response) { 
-                                    alert(response); 
-                                } 
-                            });
-                        }
-                        else{
-                            alert('新增成功'); 
-                        }
-
-                    }
+                    alert(create_status);
+                },
+                error: function(xhr) {
+                    alert(xhr.responseText);
                 }
             });
         } else {

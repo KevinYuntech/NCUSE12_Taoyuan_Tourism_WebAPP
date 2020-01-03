@@ -30,32 +30,39 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot
         {
             //驗證輸入欄位正確性, 可抽象化
             //驗證傳入資料是否為空
-            if(publicSpot == null)
+            try
             {
-                return Json(new { message = JsonConvert.SerializeObject(new ResultModel(false,"新增景點資料為空值",null)) });
-            }
-            else if (!ModelState.IsValid)
-            {
-                 //驗證欄位
-                var  ErrorDataMessage = new
+                if(publicSpot == null)
                 {
-                    // 取得所有錯誤欄位訊息
-                    ModelStateErrors = ModelState.Where(x => x.Value.Errors.Count > 0)
-                     .ToDictionary(k => k.Key, k => k.Value.Errors.Select(e => e.ErrorMessage).ToArray())
-                };
-                return Json(new { message = JsonConvert.SerializeObject(new ResultModel(false,"新增景點欄位格式有誤",ErrorDataMessage)) });
+                    return Json(new { message = JsonConvert.SerializeObject(new ResultModel(false,"新增景點資料為空值",null)) });
+                }
+                else if (!ModelState.IsValid)
+                {
+                    //驗證欄位
+                    var  ErrorDataMessage = new
+                    {
+                        // 取得所有錯誤欄位訊息
+                        ModelStateErrors = ModelState.Where(x => x.Value.Errors.Count > 0)
+                        .ToDictionary(k => k.Key, k => k.Value.Errors.Select(e => e.ErrorMessage).ToArray())
+                    };
+                    return Json(new { message = JsonConvert.SerializeObject(new ResultModel(false,"新增景點欄位格式有誤",ErrorDataMessage)) });
+                }
+                else
+                {
+                    //新增資料
+                    
+                    this._context.PublicSpot.Add(publicSpot);
+                    this._context.SaveChanges();
+                    
+                    HttpContext.Session.SetInt32("creating_spot", publicSpot.Id);
+                    return Json(new { message = JsonConvert.SerializeObject(new ResultModel(true,"新增景點資料成功",publicSpot)) });
+                }                
             }
-            else
+            catch (System.Exception)
             {
-                //新增資料
                 
-                this._context.PublicSpot.Add(publicSpot);
-                this._context.SaveChanges();
-                
-                HttpContext.Session.SetInt32("creating_spot", publicSpot.Id);
-                return Json(new { message = JsonConvert.SerializeObject(new ResultModel(true,"新增景點資料成功",publicSpot)) });
+                throw;
             }
-
         }
     
         [HttpPost]

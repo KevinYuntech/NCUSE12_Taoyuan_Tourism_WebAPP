@@ -69,17 +69,24 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot
 
         [HttpGet]
         public  IActionResult SearchSpotByDistrict(String zipcode)
-        {
-            //判斷郵遞區號, 回傳該郵遞區號對應景點資料
-            IList result = this._context.PublicSpot.Where(x => x.Name == zipcode).ToList();
+        {   
+            try
+            {
+                //判斷郵遞區號, 回傳該郵遞區號對應景點資料
+                IList result = this._context.PublicSpot.Where(x => x.Name == zipcode).ToList();
 
-            if(result.Count != 0){
-                return Json(new { message = JsonConvert.SerializeObject(new ResultModel(true,"成功查詢一到多筆資料",result)) });
+                if(result.Count != 0){
+                    return Json(new { message = JsonConvert.SerializeObject(new ResultModel(true,"成功查詢一到多筆資料",result)) });
+                }
+                else{
+                    return Json(new { message = JsonConvert.SerializeObject(new ResultModel(false,"找不到任何資料",null)) });
+                }                
             }
-            else{
-                return Json(new { message = JsonConvert.SerializeObject(new ResultModel(false,"找不到任何資料",null)) });
+            catch (System.Exception)
+            {
+                
+                throw;
             }
-            
         }
         
         //[Authorize (Roles = "Admin")]
@@ -87,22 +94,28 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot
         [HttpGet]
         public  IActionResult SearchSpotPageById(int Id)
         {
-            //判斷景點id, 回傳該id對應景點資料
-            var result = this._context.PublicSpot.SingleOrDefault(x => x.Id == Id);
+            try
+            {
+                //判斷景點id, 回傳該id對應景點資料
+                var result = this._context.PublicSpot.SingleOrDefault(x => x.Id == Id);
 
-            if(result != null){
+                if(result != null){
 
-                List<PublicSpot> list= new List<PublicSpot>();
-                list.Add(result);
-                var resultModel = new SpotListViewModel(true,"成功查詢一筆資料",list);
-                return View(resultModel);
+                    List<PublicSpot> list= new List<PublicSpot>();
+                    list.Add(result);
+                    var resultModel = new SpotListViewModel(true,"成功查詢一筆資料",list);
+                    return View(resultModel);
+                }
+                else{
+                    List<PublicSpot> list= new List<PublicSpot>();
+                    var resultModel =  new SpotListViewModel(false,"找不到任何資料",list);
+                    return View(resultModel);
+                }                
             }
-            else{
-                List<PublicSpot> list= new List<PublicSpot>();
-                var resultModel =  new SpotListViewModel(false,"找不到任何資料",list);
-                return View(resultModel);
+            catch (System.Exception)
+            {
+                throw;
             }
-
         }
 
         
@@ -110,19 +123,25 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot
         [HttpGet]
         public  IActionResult SearchSpotById(int Id)
         {
-            //判斷景點id, 回傳該id對應景點資料
-            var result = this._context.PublicSpot.SingleOrDefault(x => x.Id == Id);
+            try
+            {
+                //判斷景點id, 回傳該id對應景點資料
+                var result = this._context.PublicSpot.SingleOrDefault(x => x.Id == Id);
 
-            if(result != null){
-                var path = result.Image;
-                ViewBag.path = path;
+                if(result != null){
+                    var path = result.Image;
+                    ViewBag.path = path;
 
-                return Json(new { message = JsonConvert.SerializeObject(new ResultModel(true,"成功查詢一到多筆資料",result)) });
+                    return Json(new { message = JsonConvert.SerializeObject(new ResultModel(true,"成功查詢一到多筆資料",result)) });
+                }
+                else{
+                    return Json(new { message = JsonConvert.SerializeObject(new ResultModel(false,"找不到任何資料",null)) });
+                }                
             }
-            else{
-                return Json(new { message = JsonConvert.SerializeObject(new ResultModel(false,"找不到任何資料",null)) });
+            catch (System.Exception)
+            {
+                throw;
             }
-
         }
 
 
@@ -134,7 +153,7 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot
                 var spot = this._context.PublicSpot.SingleOrDefault(x => x.Id == SpotId);
                 var path = spot.Image;
                 
-                // 回傳檔案到 Client 需要附上 Content Type，否則瀏覽器會解析失敗。
+                
                 return Json(new { message =  path}); 
                 }
                 catch (System.Exception)
