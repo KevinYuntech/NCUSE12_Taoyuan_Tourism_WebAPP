@@ -123,9 +123,6 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot
                 var result = this._context.PublicSpot.SingleOrDefault(x => x.Id == Id);
 
                 if(result != null){
-                    var path = result.Image;
-                    ViewBag.path = path;
-
                     return Json(new { message = JsonConvert.SerializeObject(new ResultModel(true,"成功查詢一到多筆資料",result)) });
                 }
                 else{

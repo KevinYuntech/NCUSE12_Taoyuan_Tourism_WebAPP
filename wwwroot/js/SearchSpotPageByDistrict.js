@@ -123,21 +123,7 @@ $(document).ready(function () {
                 ApprovedStatus:"待審核"
             }
     
-            $.ajax({
-                type: "post",
-                url: "/CreateSpot/CreateSpotInfo",
-                data: info,
-                dataType: "json",
-                success: function (response) {
-                    //parse json
-                    var returnedData = JSON.parse(response.message);
-                    create_status = returnedData.StatusMessage;
-                    alert(create_status);
-                },
-                error: function(xhr) {
-                    alert(xhr.responseText);
-                }
-            });
+            CreateSpot(info);
         }
 
  

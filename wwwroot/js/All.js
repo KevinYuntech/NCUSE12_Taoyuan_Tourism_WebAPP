@@ -20,30 +20,13 @@ function loadLoginUser() {
     });
 }
 
-$('#view_Itneary_btn').click(function (e) { 
+$('#view_Itneary_btn').click(function (e) {
     e.preventDefault();
     if (userId === null || userId === undefined || userId === '') {
         window.location = "/Identity/Account/Login"
-    }
-    else{
+    } else {
         window.location = "/SearchItinerary/MySearchItinerary";
     }
 });
-
-
-//SPOT CRUD API
-function CreateSpot(data) {
-    
-}
-
-//SPOT CRUD API
-function EditSpot(data) {
-    
-}
-
-//SPOT CRUD API
-function DeleteSpot(data) {
-    
-}
 
 

@@ -9,27 +9,14 @@ $(document).ready(function () {
         let spot_id = $(this).parent('td').parent('tr').find('.Id').text();
         
         //ajax傳id 覆蓋dialog值
-        $.ajax({
-            type: "get",
-            url: "../SearchSpot/SearchSpotById",
-            data: {"id":spot_id},
-            dataType: "json",
-            async: false,
-            success: function(response) {
-                let data = JSON.parse(response.message);
-                let spot = data.Data;
-                $('#placeid').val(spot.Id);
-                $('#placeinput').val(spot.Name);
-                $('#numberinput').val(spot.Zipcode);
-                $('#addressinput').val(spot.Address);
-                $('#timearea').val(spot.Opentime);
-                $('#descriptionarea').val(spot.Description);  
-                $('#image').val(spot.Image); 
-            },
-            error: function(xhr) {
-                alert(xhr.responseText);
-            }
-        });
+        let spot = SearchSpot(spot_id);
+        $('#placeid').val(spot.Id);
+        $('#placeinput').val(spot.Name);
+        $('#numberinput').val(spot.Zipcode);
+        $('#addressinput').val(spot.Address);
+        $('#timearea').val(spot.Opentime);
+        $('#descriptionarea').val(spot.Description);  
+        $('#image').val(spot.Image);
     });
 
     $('.delete_btn').click(function (e) { 
@@ -39,22 +26,7 @@ $(document).ready(function () {
         {
             //抓取當前景點id
             let spot_id = $(this).parent('td').parent('tr').find('.Id').text();
-
-            //ajax傳id 覆蓋dialog值
-            $.ajax({
-                type: "delete",
-                url: "../DeleteSpot/DeleteSpotById",
-                data: {"id":spot_id},
-                dataType: "json",
-                async: false,
-                success: function(response) {
-                    alert('刪除成功');
-                    window.location.reload();  
-                },
-                error: function(xhr) {
-                    alert(xhr.responseText);
-                }
-            });
+            DeleteSpot(spot_id);
         }
         else
         {
@@ -84,31 +56,10 @@ $('#submit_btn').click(function(e) {
         Description: Description,
         UserId: userId,
         Image:Image,
-        ApprovedStatus:"待審核"
+        ApprovedStatus:"審核成功"
     }
 
-    $.ajax({
-        type: "put",
-        url: "/EditSpot/EditSpot",
-        data: info,
-        dataType: "json",
-        success: function(response) {
-            let returnedData = JSON.parse(response.message);
-            let status = returnedData.Status;
-            ;
-            if (status === true) {
-                alert("修改資料成功");
-                window.location.reload();
-            } else {
-                alert("修改資料失敗")
-                alert(returnedData.StatusMessage);
-            }
-        },
-        error: function(xhr) {
-            alert(xhr.responseText);
-        }
-    });
-
+    EditSpot(info);
 });
 });
 
