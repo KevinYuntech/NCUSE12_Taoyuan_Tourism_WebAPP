@@ -1,13 +1,120 @@
+@model NCUSE12_Taoyuan_Tourism_WebAPP.Models.SpotListViewModel
+
 @{
-    ViewData["Title"] = "ApproveSpot Page";
+ViewData["Title"] = "ApproveSpot Page";
 }
 
 @section css {
-
+<link rel="stylesheet" href="~/css/ApproveSpotPage.css">
 }
 @section js {
-    <script src=""></script>
+<script src="~/js/ApproveSpotPage.js"></script>
 }
 
+<div class="container">
+    <div class="spot_area">
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">審核景點</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="placeid">景點編號</label>
+                                <input type="text" class="form-control" id="placeid" aria-describedby="placeidHelp"
+                                    placeholder="Enter" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="placeinput">景點名稱</label>
+                                <input type="text" class="form-control" id="placeinput"
+                                    aria-describedby="placeinputHelp" placeholder="Enter" readonly>
+                                <small id="placeinputHelp" class="form-text text-muted">21個字以內
+                                </small>
+                            </div>
+                            <div class="form-group">
+                                <label for="numberinput">郵遞區號</label>
+                                <input type="text" class="form-control" id="numberinput"
+                                    aria-describedby="numberinputHelp"  readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="addressinput">地址</label>
+                                <input type="text" class="form-control" id="addressinput"
+                                    aria-describedby="addressinputHelp"  readonly>
+                                <small id="addressinputinputHelp" class="form-text text-muted">45個字以內
+                                </small>
+                            </div>
+                            <div class="form-group">
+                                <label for="timearea">營業時間</label>
+                                <input type="text" class="form-control" id="timearea" aria-describedby="timeareaHelp"
+                                     readonly>
+                                <small id="timeareaHelp" class="form-text text-muted">265個字以內
+                                </small>
+                            </div>
+                            <div class="form-group">
+                                <label for="descriptionarea">景點介紹</label>
+                                <input type="text" class="form-control" id="descriptionarea"
+                                    aria-describedby="descriptionareaHelp"  readonly>
+                                <small id="descriptionareaHelp" class="form-text text-muted">1165個字以內
+                                </small>
+                            </div>
+                            <div class="form-group">
+                                <label for="image">圖片連結</label>
+                                <input type="text" class="form-control" id="image" aria-describedby="imageHelp"
+                                     readonly>
+                                <small id="imageHelp" class="form-text text-muted">請勿上傳有毒連結
+                                </small>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="approve_valid_btn">合規景點</button>
+                        <button type="button" class="btn btn-danger" id="approve_invalid_btn">不合規景點</button>
+                        <button type="button" class="btn btn-dark" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col" width="15%">景點編號</th>
+                    <th scope="col" width="15%">郵遞區號</th>
+                    <th scope="col" width="15%">地址</th>
+                    <th scope="col" width="20%">景點名稱</th>
+                    <th scope="col" width="40%">景點介紹</th>
+                    <th scope="col" width="15%">開放時間</th>
+                    <th scope="col" width="10%">審核</th>
+                </tr>
+            </thead>
 
-審核景點
+            <tbody id="Pending_Spot">
+                @foreach (var item in Model.Data)
+                {
+                <tr>
+                    <th scope="row" class="Id">@item.Id</th>
+                    <td class="Zipcode">@item.Zipcode</td>
+                    <td class="Zipcode">@item.Address</td>
+                    <td>@item.Name</td>
+                    <td>@item.Description</td>
+                    <td>@item.Opentime</td>
+                    <td>
+                        <button type="button" id = "approve_btn" class="btn btn-primary edit_btn" data-toggle="modal"
+                            data-target="#exampleModal">
+                            審核
+                        </button>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>
+</div>

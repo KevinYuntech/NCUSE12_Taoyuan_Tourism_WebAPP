@@ -29,3 +29,21 @@ $('#view_Itneary_btn').click(function (e) {
         window.location = "/SearchItinerary/MySearchItinerary";
     }
 });
+
+
+//SPOT CRUD API
+function CreateSpot(data) {
+    
+}
+
+//SPOT CRUD API
+function EditSpot(data) {
+    
+}
+
+//SPOT CRUD API
+function DeleteSpot(data) {
+    
+}
+
+

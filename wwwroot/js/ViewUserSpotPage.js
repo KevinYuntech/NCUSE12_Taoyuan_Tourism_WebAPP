@@ -83,7 +83,8 @@ $('#submit_btn').click(function(e) {
         Opentime: Opentime,
         Description: Description,
         UserId: userId,
-        Image:Image
+        Image:Image,
+        ApprovedStatus:"待審核"
     }
 
     $.ajax({

@@ -40,7 +40,7 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers
                 //判斷郵遞區號session, 回傳該郵遞區號對應景點資料
                 try
                 {
-                    IList<PublicSpot> result = this._context.PublicSpot.Where(x => x.UserId == user_Id).ToList();
+                    IList<PublicSpot> result = this._context.PublicSpot.Where(x => x.UserId == user_Id).Where(x => x.ApprovedStatus == "審核成功").ToList();
                     var resultModel = new SpotListViewModel(true,"成功查詢一筆資料",result);
                     return View(resultModel);
                 }

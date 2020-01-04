@@ -19,13 +19,6 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot
     public  class SearchSpotController : Controller
     {
         protected SpotDbContext _context;
-        private readonly static Dictionary<string, string> _contentTypes = new Dictionary<string, string>
-        {
-            {".png", "image/png"},
-            {".jpg", "image/jpeg"},
-            {".jpeg", "image/jpeg"},
-            {".gif", "image/gif"}
-        };
 
         public SearchSpotController(SpotDbContext context)
         {
@@ -57,7 +50,7 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot
                 {
                     var Zipcode = HttpContext.Session.GetInt32("Zipcode");
                     var Zone = HttpContext.Session.GetString("Zone");
-                    IList result = this._context.PublicSpot.Where(x => x.Zipcode == Zipcode).ToList();
+                    IList result = this._context.PublicSpot.Where(x => x.Zipcode == Zipcode).Where(x => x.ApprovedStatus == "審核成功").ToList();
                     return Json(new { message = JsonConvert.SerializeObject(new ResultModel(true,"成功查詢一到多筆資料",result)),Zone = Zone }); 
                 }
                 catch (System.Exception)
@@ -73,7 +66,7 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot
             try
             {
                 //判斷郵遞區號, 回傳該郵遞區號對應景點資料
-                IList result = this._context.PublicSpot.Where(x => x.Name == zipcode).ToList();
+                IList result = this._context.PublicSpot.Where(x => x.Name == zipcode).Where(x => x.ApprovedStatus == "審核景點").ToList();
 
                 if(result.Count != 0){
                     return Json(new { message = JsonConvert.SerializeObject(new ResultModel(true,"成功查詢一到多筆資料",result)) });
@@ -84,12 +77,11 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot
             }
             catch (System.Exception)
             {
-                
+                return Json(new { message = JsonConvert.SerializeObject(new ResultModel(false,"找不到任何資料",null)) });
                 throw;
             }
         }
         
-        //[Authorize (Roles = "Admin")]
         //單一景點頁面
         [HttpGet]
         public  IActionResult SearchSpotPageById(int Id)
@@ -98,8 +90,9 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot
             {
                 //判斷景點id, 回傳該id對應景點資料
                 var result = this._context.PublicSpot.SingleOrDefault(x => x.Id == Id);
-
-                if(result != null){
+                String spot_valid = result.ApprovedStatus;
+                
+                if(result != null &&spot_valid == "審核成功"){
 
                     List<PublicSpot> list= new List<PublicSpot>();
                     list.Add(result);
@@ -114,6 +107,7 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot
             }
             catch (System.Exception)
             {
+                return Json(new { message = JsonConvert.SerializeObject(new ResultModel(false,"找不到任何資料",null)) });
                 throw;
             }
         }
@@ -140,6 +134,7 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot
             }
             catch (System.Exception)
             {
+                return Json(new { message = JsonConvert.SerializeObject(new ResultModel(false,"找不到任何資料",null)) });
                 throw;
             }
         }
@@ -158,7 +153,7 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Spot
                 }
                 catch (System.Exception)
                 {
-                    
+                    return Json(new { message = JsonConvert.SerializeObject(new ResultModel(false,"找不到任何資料",null)) });
                     throw;
                 }
         }

@@ -1,0 +1,8 @@
+.spot_area{
+    background-color: darkgray;
+    margin: 50px;
+}
+
+.spot_area>form{
+    margin: 50px;
+}

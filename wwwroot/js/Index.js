@@ -3,4 +3,5 @@ $(document).ready(function () {
         e.preventDefault();
         window.location = "/ApproveSpot/ApproveSpotPage"
     });
+    TEST();
 });

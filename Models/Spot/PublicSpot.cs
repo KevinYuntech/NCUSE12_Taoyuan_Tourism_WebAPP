@@ -28,5 +28,7 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Models.Spot
         public String UserId { get; set; }
 
         public String Image { get; set; } 
+
+        public String ApprovedStatus{ get; set; } 
     }
 }
