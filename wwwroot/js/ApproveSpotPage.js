@@ -1,14 +1,17 @@
 $(document).ready(function () {
 
-    $('#approve_btn').click(function (e) {
+    $('.approve_btn').click(function (e) {
         e.preventDefault();
 
         //抓取當前景點id
         let spot_id = $(this).parent('td').parent('tr').find('.Id').text();
 
+        console.log(spot_id);
+
         //ajax傳id 覆蓋dialog值
         let spot = SearchSpot(spot_id);
 
+        $('#userid').val(spot.UserId);
         $('#placeid').val(spot.Id);
         $('#placeinput').val(spot.Name);
         $('#numberinput').val(spot.Zipcode);
@@ -29,7 +32,8 @@ $(document).ready(function () {
         let Opentime = $('#timearea').val();
         let Description = $('#descriptionarea').val();
         let Image = $('#image').val();;
-    
+        let UserId = $('#userid').val();
+
         let info = {
             Id:Id,
             Name: Name,
@@ -37,7 +41,7 @@ $(document).ready(function () {
             Address: Address,
             Opentime: Opentime,
             Description: Description,
-            UserId: userId,
+            UserId: UserId,
             Image:Image,
             ApprovedStatus:"審核成功"
         }
@@ -54,7 +58,7 @@ $(document).ready(function () {
         let Address = $('#addressinput').val();
         let Opentime = $('#timearea').val();
         let Description = $('#descriptionarea').val();
-        let Image = $('#image').val();;
+        let Image = $('#image').val();
     
         let info = {
             Id:Id,

@@ -19,7 +19,7 @@
     <h2 align="center"><font size="30" color=#0000AA face="DFKai-sb">景點介紹</font></h1>
   </div>
   <div align="right">
-    <input type="button" value="加入行程" name="加入行程" style="width:150px;height:50px;">
+    <input type="button" id="add_itinerary_btn" value="加入行程" style="width:150px;height:50px;">
   </div>
   <div align="center">
     <img src= "" width="500" height="250" id="spot_image">
@@ -34,7 +34,7 @@
       @item.Id
     </div>
     <tr>
-        <td readonly align='center' valign="middle" width="100px" id="spot_id" ><font face="DFKai-sb" size="5" color=#0000AA>編號</font></td><td align='center' valign="middle" width="700px"><font face="DFKai-sb" color=#0000AA>@item.Id</font></td>
+        <td readonly align='center' valign="middle" width="100px" id="spot_id" ><font face="DFKai-sb" size="5" color=#0000AA>編號</font></td><td align='center' valign="middle" width="700px"><font face="DFKai-sb" color=#0000AA id="spot_id" >@item.Id</font></td>
 
     </tr>
     <tr>

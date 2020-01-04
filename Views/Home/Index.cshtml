@@ -1,52 +1,67 @@
 ﻿@model NCUSE12_Taoyuan_Tourism_WebAPP.Models.IndexModel
 @{
-    ViewData["Title"] = "Home Page";
+ViewData["Title"] = "Home Page";
 }
 
 @section css {
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
-   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/index.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="./css/index.css">
 }
 @section js {
-    <script src="~/js/Index.js"></script>
+<script src="~/js/Index.js"></script>
 }
-  <body>
-      
-<!--桃園地圖-->
-@if (Model.RoleIsAdminStatus)
-{
-    <div id="approve_area">
-      <button id="approve_btn" class="btn btn-primary">審核景點</button>
-    </div>
-}
-<div class="container">
-  <div class="row justify-content-center">
-     <div class="col-9">
-    <div class="PlacePic">
-    <IMG SRC="~/Img/Index/桃園.png" WIDTH=450px HEIGHT=534px usemap="#imagemap">
-<map name="imagemap">
-  <!--新屋區--><area shape="rect" coords="53,139,104,159" href="~/SearchSpot/SearchSpotPageByDistrict?Zipcode=327&Zone=新屋區">
-  <!--觀音區--><area shape="rect" coords="95,80,148,98" href="~/SearchSpot/SearchSpotPageByDistrict?Zipcode=328&Zone=觀音區">
-  <!--大園區--><area shape="rect" coords="177,49,228,68" href="~/SearchSpot/SearchSpotPageByDistrict?Zipcode=337&Zone=大園區">
-  <!--蘆竹區--><area shape="rect" coords="259,50,307,67" href="~/SearchSpot/SearchSpotPageByDistrict?Zipcode=338&Zone=蘆竹區">
-  <!--龜山區--><area shape="rect" coords="317,94,365,109" href="~/SearchSpot/SearchSpotPageByDistrict?Zipcode=333&Zone=龜山區">
-  <!--桃園區--><area shape="rect" coords="270,107,304,142" href="~/SearchSpot/SearchSpotPageByDistrict?Zipcode=330&Zone=桃園區">
-  <!--中壢區--><area shape="rect" coords="184,131,231,150" href="~/SearchSpot/SearchSpotPageByDistrict?Zipcode=320&Zone=中壢區">
-  <!--楊梅區--><area shape="rect" coords="117,197,165,214" href="~/SearchSpot/SearchSpotPageByDistrict?Zipcode=334&Zone=楊梅區">
-  <!--八德區--><area shape="rect" coords="264,162,311,172" href="~/SearchSpot/SearchSpotPageByDistrict?Zipcode=334&Zone=八德區">
-  <!--平鎮區--><area shape="rect" coords="189,203,238,222" href="~/SearchSpot/SearchSpotPageByDistrict?Zipcode=324&Zone=平鎮區">
-  <!--大溪區--><area shape="rect" coords="259,241,309,257" href="~/SearchSpot/SearchSpotPageByDistrict?Zipcode=335&Zone=大溪區">
-  <!--龍潭區--><area shape="rect" coords="181,265,229,283" href="~/SearchSpot/SearchSpotPageByDistrict?Zipcode=325&Zone=龍潭區">
-　<!--復興區--><area shape="rect" coords="333,368,381,386" href="~/SearchSpot/SearchSpotPageByDistrict?Zipcode=336&Zone=復興區">
-</map>
 
-    </div>
-    </div>
+<body>
 
-<!--新增景點及行程規劃-->
+  <!--桃園地圖-->
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-9">
+        @if (Model.RoleIsAdminStatus)
+        {
+        <div id="approve_area">
+          <button id="approve_btn" class="btn btn-primary">審核景點</button>
+        </div>
+        }
+        <div class="PlacePic">
+          <img SRC="~/Img/Index/桃園.png" WIDTH=450px HEIGHT=534px usemap="#imagemap">
+          <map name="imagemap">
+            <!--新屋區--><area shape="rect" coords="53,139,104,159"
+              href="~/SearchSpot/SearchSpotPageByDistrict?Zipcode=327&Zone=新屋區">
+            <!--觀音區--><area shape="rect" coords="95,80,148,98"
+              href="~/SearchSpot/SearchSpotPageByDistrict?Zipcode=328&Zone=觀音區">
+            <!--大園區--><area shape="rect" coords="177,49,228,68"
+              href="~/SearchSpot/SearchSpotPageByDistrict?Zipcode=337&Zone=大園區">
+            <!--蘆竹區--><area shape="rect" coords="259,50,307,67"
+              href="~/SearchSpot/SearchSpotPageByDistrict?Zipcode=338&Zone=蘆竹區">
+            <!--龜山區--><area shape="rect" coords="317,94,365,109"
+              href="~/SearchSpot/SearchSpotPageByDistrict?Zipcode=333&Zone=龜山區">
+            <!--桃園區--><area shape="rect" coords="270,107,304,142"
+              href="~/SearchSpot/SearchSpotPageByDistrict?Zipcode=330&Zone=桃園區">
+            <!--中壢區--><area shape="rect" coords="184,131,231,150"
+              href="~/SearchSpot/SearchSpotPageByDistrict?Zipcode=320&Zone=中壢區">
+            <!--楊梅區--><area shape="rect" coords="117,197,165,214"
+              href="~/SearchSpot/SearchSpotPageByDistrict?Zipcode=334&Zone=楊梅區">
+            <!--八德區--><area shape="rect" coords="264,162,311,172"
+              href="~/SearchSpot/SearchSpotPageByDistrict?Zipcode=334&Zone=八德區">
+            <!--平鎮區--><area shape="rect" coords="189,203,238,222"
+              href="~/SearchSpot/SearchSpotPageByDistrict?Zipcode=324&Zone=平鎮區">
+            <!--大溪區--><area shape="rect" coords="259,241,309,257"
+              href="~/SearchSpot/SearchSpotPageByDistrict?Zipcode=335&Zone=大溪區">
+            <!--龍潭區--><area shape="rect" coords="181,265,229,283"
+              href="~/SearchSpot/SearchSpotPageByDistrict?Zipcode=325&Zone=龍潭區">
+            　
+            <!--復興區--><area shape="rect" coords="333,368,381,386"
+              href="~/SearchSpot/SearchSpotPageByDistrict?Zipcode=336&Zone=復興區">
+          </map>
+
+        </div>
+      </div>
+
+      <!--新增景點及行程規劃-->
 
 
 </body>
-
-

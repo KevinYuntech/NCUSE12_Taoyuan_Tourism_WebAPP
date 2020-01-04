@@ -4,3 +4,8 @@ body {
 input{border:0;
 background-color:#003C9D;
 color:#fff;border-radius:10px;}
+
+.function_btn_area{
+    text-align: center;
+    margin: 50px;
+}

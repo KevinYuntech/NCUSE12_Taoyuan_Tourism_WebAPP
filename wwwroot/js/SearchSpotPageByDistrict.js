@@ -88,9 +88,8 @@ $(document).ready(function () {
         }
     });
     //send spot info to backend
-    $('#addplaceform').submit(function (e) {
-        e.preventDefault(); // avoid to execute the actual submit of the form
-
+    $('#submit_btn').click(function (e) {
+       
         if ($('#placeinput').val() == "" || $('#numberinput').val() == "" || $('#addressinput').val() == "" || $('#timearea').val() == ""|| $('#descriptionarea').val() == "")
         {
           alert("尚有未輸入資料！！");
@@ -104,10 +103,10 @@ $(document).ready(function () {
         else if (!checkLength($('#addressinput').val().length,45)) {
           alert("超過文字上限！");
         }
-        else if (!checkLength($('#timeinput').val().length,265)) {
+        else if (!checkLength($('#timearea').val().length,265)) {
           alert("超過文字上限！");
         }
-        else if (!checkLength($('#descriptioninput').val().length,1165)) {
+        else if (!checkLength($('#descriptionarea').val().length,1165)) {
           alert("超過文字上限！");
         }else{
             let create_status = false;
@@ -133,9 +132,6 @@ $(document).ready(function () {
             CreateSpot(info);
         }
 
- 
-
-
     });
 
     $('#view_Itneary_btn').click(function (e) { 
@@ -156,3 +152,13 @@ function addplaceclose() {
     console.log("close a dialog");
     document.getElementById('addplaceform').style.display = "none";
 }
+
+function checkLength(user_input_length, max_length){
+    if(user_input_length <= max_length)
+    {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }

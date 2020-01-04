@@ -27,10 +27,6 @@ $(document).ready(function () {
             //抓取當前景點id
             let spot_id = $(this).parent('td').parent('tr').find('.Id').text();
             DeleteSpot(spot_id);
-        }
-        else
-        {
-            alert("刪除取消");      
         }    
         
     });

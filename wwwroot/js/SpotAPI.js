@@ -78,6 +78,7 @@ function SearchSpot(spot_id) {
         data: {"id":spot_id},
         dataType: "json",
         async: false,
+        cache:false,
         success: function(response) {
             let data = JSON.parse(response.message);
             _spot = data.Data;
