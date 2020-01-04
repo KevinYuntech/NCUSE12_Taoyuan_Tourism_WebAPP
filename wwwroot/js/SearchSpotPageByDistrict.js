@@ -91,18 +91,25 @@ $(document).ready(function () {
     $('#addplaceform').submit(function (e) {
         e.preventDefault(); // avoid to execute the actual submit of the form
 
-        var place_rule = /^\u4e00-\u9fff\d{0,20}$/;
-        var number_rule = /^\u4e00-\u9fff\d{0,5}$/;
-        var address_rule = /^\u4e00-\u9fff\d{0,45}$/;
-        var time_rule = /^\u4e00-\u9fff\d{0,300}$/;
-        var description_rule = /^\u4e00-\u9fff\d{0,1000}$/;
-        if ($('#placeinput').val() == "" || $('#numberinput').val() == "" || $('#addressinput').val() == "" || $('#timearea').val() == ""|| $('#descriptionarea').val() == "")  alert("尚有未輸入資料！！");
-        /*else if (!place_rule.test($('#placeinput').val())) {alert("超過文字上限！"); console.log("here");}
-        else if (!number_rule.test($('#numberinput').val())) {alert("超過文字上限！"); console.log("here");}
-        else if (!address_rule.test($('#addressinput').val())) {alert("超過文字上限！"); console.log("here");}
-        else if (!time_rule.test($('#timearea').val())) {alert("超過文字上限！"); console.log("here");}
-        else if (!description_rule.test($('#descriptionarea').val())) {alert("超過文字上限！"); console.log("here");}
-        */else{
+        if ($('#placeinput').val() == "" || $('#numberinput').val() == "" || $('#addressinput').val() == "" || $('#timearea').val() == ""|| $('#descriptionarea').val() == "")
+        {
+          alert("尚有未輸入資料！！");
+        }
+        else if (!checkLength($('#placeinput').val().length,20)) {
+          alert("超過文字上限！");
+        }
+        else if (!checkLength($('#numberinput').val().length,3)) {
+          alert("超過文字上限！");
+        }
+        else if (!checkLength($('#addressinput').val().length,45)) {
+          alert("超過文字上限！");
+        }
+        else if (!checkLength($('#timeinput').val().length,265)) {
+          alert("超過文字上限！");
+        }
+        else if (!checkLength($('#descriptioninput').val().length,1165)) {
+          alert("超過文字上限！");
+        }else{
             let create_status = false;
 
             let Name = $('#placeinput').val();

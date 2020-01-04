@@ -10,6 +10,8 @@ function CreateSpot(info) {
                 var returnedData = JSON.parse(response.message);
                 create_status = returnedData.StatusMessage;
                 alert(create_status);
+                window.location.reload();
+                
             },
             error: function (xhr) {
                 alert(xhr.responseText);
