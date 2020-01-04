@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using NCUSE12_Taoyuan_Tourism_WebAPP.Extensions;
 using NCUSE12_Taoyuan_Tourism_WebAPP.Models;
+
 
 namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers
 {
@@ -21,7 +18,11 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var userId = User.FindFirstValue(ClaimTypes.Name);
+            bool roleIsAdminStatus = User.IsInRole("Admin");
+
+            
+            return View(new IndexModel(roleIsAdminStatus));
         }
 
         public IActionResult Privacy()

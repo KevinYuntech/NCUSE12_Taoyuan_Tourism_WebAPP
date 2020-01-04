@@ -90,26 +90,38 @@ $(document).ready(function () {
     //send spot info to backend
     $('#addplaceform').submit(function (e) {
         e.preventDefault(); // avoid to execute the actual submit of the form
-        let create_status = false;
 
-        let Name = $('#placeinput').val();
-        let Zipcode = $('#numberinput').val();
-        let Address = $('#addressinput').val();
-        let Opentime = $('#timearea').val();
-        let Description = $('#descriptionarea').val();
-        let Image = $('#image').val();
+        var place_rule = /^\u4e00-\u9fff\d{0,20}$/;
+        var number_rule = /^\u4e00-\u9fff\d{0,3}$/;
+        var address_rule = /^\u4e00-\u9fff\d{0,45}$/;
+        var time_rule = /^\u4e00-\u9fff\d{0,300}$/;
+        var description_rule = /^\u4e00-\u9fff\d{0,1000}$/;
+        if ($('#placeinput').val() == "" || $('#numberinput').val() == "" || $('#addressinput').val() == "" || $('#timearea').val() == ""|| $('#descriptionarea').val() == "")  alert("尚有未輸入資料！！");
+        else if (!place_rule.test($('#placeinput').val())) {alert("超過文字上限！"); console.log("here");}
+        else if (!number_rule.test($('#numberinput').val())) {alert("超過文字上限！"); console.log("here");}
+        else if (!address_rule.test($('#addressinput').val())) {alert("超過文字上限！"); console.log("here");}
+        else if (!time_rule.test($('#timearea').val())) {alert("超過文字上限！"); console.log("here");}
+        else if (!description_rule.test($('#descriptionarea').val())) {alert("超過文字上限！"); console.log("here");}
+        else{
+            let create_status = false;
 
-        let info = {
-            Name: Name,
-            Zipcode: Zipcode,
-            Address: Address,
-            Opentime: Opentime,
-            Description: Description,
-            UserId: userId,
-            Image:Image
-        }
-
-        if (Name.length && Zipcode.length && Opentime.length && Address.length) {
+            let Name = $('#placeinput').val();
+            let Zipcode = $('#numberinput').val();
+            let Address = $('#addressinput').val();
+            let Opentime = $('#timearea').val();
+            let Description = $('#descriptionarea').val();
+            let Image = $('#image').val();
+    
+            let info = {
+                Name: Name,
+                Zipcode: Zipcode,
+                Address: Address,
+                Opentime: Opentime,
+                Description: Description,
+                UserId: userId,
+                Image:Image
+            }
+    
             $.ajax({
                 type: "post",
                 url: "/CreateSpot/CreateSpotInfo",
@@ -125,9 +137,9 @@ $(document).ready(function () {
                     alert(xhr.responseText);
                 }
             });
-        } else {
-            alert("尚有未輸入資料!!");
         }
+
+ 
 
 
     });

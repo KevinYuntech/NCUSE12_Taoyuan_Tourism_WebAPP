@@ -1,4 +1,5 @@
-﻿@{
+﻿@model NCUSE12_Taoyuan_Tourism_WebAPP.Models.IndexModel
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -8,12 +9,17 @@
     <link rel="stylesheet" href="./css/index.css">
 }
 @section js {
-    <script src="~/js/index.js"></script>
+    <script src="~/js/Index.js"></script>
 }
   <body>
+      
 <!--桃園地圖-->
-
-    <br><br>
+@if (Model.RoleIsAdminStatus)
+{
+    <div id="approve_area">
+      <button id="approve_btn" class="btn btn-primary">審核景點</button>
+    </div>
+}
 <div class="container">
   <div class="row justify-content-center">
      <div class="col-9">
