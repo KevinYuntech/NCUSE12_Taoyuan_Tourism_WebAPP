@@ -10,6 +10,7 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Itinerary
 {
     public class SearchItineraryController : Controller
     {
+        [HttpGet]
         public IActionResult GetCurrentItineraryList()
         {   
             //查詢現有景點行程
@@ -18,11 +19,16 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Itinerary
 
             return Json(new { message = ItineraryList});
           }
-
+        [HttpGet]
           public IActionResult MySearchItinerary()
           {
-
               return View();
           }
+
+        [HttpGet]
+          public IActionResult DownloadItnerary()
+          {
+              return View();
+          }          
     }
 }

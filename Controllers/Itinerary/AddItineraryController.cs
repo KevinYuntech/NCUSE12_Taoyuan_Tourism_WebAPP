@@ -53,14 +53,14 @@ namespace NCUSE12_Taoyuan_Tourism_WebAPP.Controllers.Itinerary
                 List<Int32> tmp = new List<Int32>();
                 tmp.Add(itineraryModel.Spot_Id);
                 HttpContext.Session.SetComplexData("ItineraryList", tmp);
-                return Json(new { status = "首次新增", message = tmp.Count() });
+                return Json(new { status = "首次新增景點進行程成功", message = tmp.Count() });
             }
             else
             {
                 ItineraryList.Add(itineraryModel.Spot_Id);
                 HttpContext.Session.SetComplexData("ItineraryList", ItineraryList);
                 var tmp = HttpContext.Session.GetComplexData<List<Int32>>("ItineraryList");
-                return Json(new { status = "再次新增", message = tmp.Count() });
+                return Json(new { status = "再次新增景點進行程成功", message = tmp.Count() });
             }
 
         }

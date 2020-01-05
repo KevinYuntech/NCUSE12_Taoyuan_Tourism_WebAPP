@@ -59,7 +59,7 @@ $(document).ready(function () {
                         success: function (response) {
                             alert(response.status)
     
-                            alert("目前新增數量" + response.message);
+                            alert("目前行程裡的景點為" + response.message + "個");
                         }
                     });
                 }
