@@ -67,7 +67,7 @@ $(document).ready(function () {
             Address: Address,
             Opentime: Opentime,
             Description: Description,
-            UserId: userId,
+            UserId: $('#userid').val(),
             Image:Image,
             ApprovedStatus:"審核失敗"
         }

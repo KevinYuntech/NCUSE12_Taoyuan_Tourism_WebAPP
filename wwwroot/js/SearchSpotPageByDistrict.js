@@ -90,48 +90,19 @@ $(document).ready(function () {
     //send spot info to backend
     $('#submit_btn').click(function (e) {
        
-        if ($('#placeinput').val() == "" || $('#numberinput').val() == "" || $('#addressinput').val() == "" || $('#timearea').val() == ""|| $('#descriptionarea').val() == "")
-        {
-          alert("尚有未輸入資料！！");
+        let info = {
+            Name: $('#placeinput').val(),
+            Zipcode: $('#numberinput').val(),
+            Address: $('#addressinput').val(),
+            Opentime: $('#timearea').val(),
+            Description:  $('#descriptionarea').val(),
+            UserId: userId,
+            Image:$('#image').val(),
+            ApprovedStatus:"待審核"
         }
-        else if (!checkLength($('#placeinput').val().length,20)) {
-          alert("超過文字上限！");
-        }
-        else if (!checkLength($('#numberinput').val().length,3)) {
-          alert("超過文字上限！");
-        }
-        else if (!checkLength($('#addressinput').val().length,45)) {
-          alert("超過文字上限！");
-        }
-        else if (!checkLength($('#timearea').val().length,265)) {
-          alert("超過文字上限！");
-        }
-        else if (!checkLength($('#descriptionarea').val().length,1165)) {
-          alert("超過文字上限！");
-        }else{
-            let create_status = false;
-
-            let Name = $('#placeinput').val();
-            let Zipcode = $('#numberinput').val();
-            let Address = $('#addressinput').val();
-            let Opentime = $('#timearea').val();
-            let Description = $('#descriptionarea').val();
-            let Image = $('#image').val();
-    
-            let info = {
-                Name: Name,
-                Zipcode: Zipcode,
-                Address: Address,
-                Opentime: Opentime,
-                Description: Description,
-                UserId: userId,
-                Image:Image,
-                ApprovedStatus:"待審核"
-            }
-    
+        if(ValidInputField(info)){
             CreateSpot(info);
         }
-
     });
 
     $('#view_Itneary_btn').click(function (e) { 
@@ -153,12 +124,3 @@ function addplaceclose() {
     document.getElementById('addplaceform').style.display = "none";
 }
 
-function checkLength(user_input_length, max_length){
-    if(user_input_length <= max_length)
-    {
-      return true;
-    }
-    else {
-      return false;
-    }
-  }
