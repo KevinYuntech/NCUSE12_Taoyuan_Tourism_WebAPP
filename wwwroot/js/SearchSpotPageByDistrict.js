@@ -84,16 +84,18 @@ $(document).ready(function () {
             }, 'slow');
 
             $('#numberinput').val(_Zipcode);
-            $('#addressinput').val('桃園市' + _Zone);
+            $('#front_addressinput').val('桃園市' + _Zone);
         }
     });
     //send spot info to backend
     $('#submit_btn').click(function (e) {
-       
+        Address = $('#front_addressinput').val()+ $('#addressinput').val();
+        console.log(Address);
+
         let info = {
             Name: $('#placeinput').val(),
             Zipcode: $('#numberinput').val(),
-            Address: $('#addressinput').val(),
+            Address: Address,
             Opentime: $('#timearea').val(),
             Description:  $('#descriptionarea').val(),
             UserId: userId,

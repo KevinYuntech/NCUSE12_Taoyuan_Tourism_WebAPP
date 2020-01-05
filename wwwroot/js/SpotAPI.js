@@ -116,30 +116,30 @@ function ValidInputField(info) {
     if (Name == "" || Zipcode == "" || Address == "" || Opentime == ""|| Description == "" || Image =="")
     {
       alert("尚有未輸入資料！！");
-      status == false;
+      status = false;
     }
     else if (!checkLength(Name.length,20)) {
       alert("景點名稱超過文字上限！");
-      status == false;
+      status = false;
     }
     else if (!checkLength(Zipcode.length,3)) {
       alert("郵遞區號超過文字上限！");
-      status == false;
+      status = false;
     }
     else if (!checkLength(Address.length,45)) {
       alert("地址超過文字上限！");
-      status == false;
+      status = false;
     }
     else if (!checkLength(Opentime.length,265)) {
       alert("營業時間超過文字上限！");
-      status == false;
+      status = false;
     }
     else if (!checkLength(Description.length,1165)) {
       alert("景點介紹超過文字上限！");
-      status == false;
+      status = false;
     }
     else{
-        status == true;
+        status = true;
     }
 
     return status;
