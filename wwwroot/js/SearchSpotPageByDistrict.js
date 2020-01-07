@@ -23,10 +23,9 @@ $(document).ready(function () {
                     "<td>" + spotList[index].Name + "</td>" +
                     "<td>" + spotList[index].Zipcode + "</td>" +
                     "<td>" + spotList[index].Address + "</td>" +
-                    "<td>" + spotList[index].Description + "</td>" +
+                    
                     "<td>" + spotList[index].Opentime + "</td>" +
-                    "<td>" + "<button class=add_itinerary>新增行程</button>" + "</td>" +
-                    "<td>" + "<button class=view_spot_detail_info>查看詳細資料</button>" + "</td>"
+                    "<td align='center' colspan='2'>" + "<button class=add_itinerary>加入行程</button>" +"&nbsp;&nbsp;"+"<button class=view_spot_detail_info>查看詳細資料</button>" + "</td>"
                 "</tr>";
 
                 $('#SpotListTable').append(spot_str);
@@ -118,7 +117,33 @@ $(document).ready(function () {
         }
     });    
 });
+$(function(){
+	$('#BackTop').click(function(){ 
+		$('html,body').animate({scrollTop:0}, 333);
+	});
+	$(window).scroll(function() {
+		if ( $(this).scrollTop() > 150 ){
+			$('#BackTop').fadeIn(222);
+		} else {
+			$('#BackTop').stop().fadeOut(222);
+		}
+	}).scroll();
+});
 
+
+$(document).ready(function(){
+    $("div").on("scroll", function() { 
+        if ($("div").scrollTop() > 0) { 
+            $("#totop").fadeIn();
+        }
+        else {
+            $("#totop").fadeOut();
+        }
+    });
+    $("#totop").on("click", function() {
+    	$("div").animate({ scrollTop: 0 }, "slow");
+    });
+});
 
 
 function addplaceclose() {

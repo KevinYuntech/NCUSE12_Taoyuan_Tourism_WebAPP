@@ -1,89 +1,89 @@
 body {
-    background-color:#ACD6FF;
+  background-color:#ACD6FF;
 }
 
 .btnAdd, .btnPlan{
-    float:right;
+  float:right;
 }
 .addplaceform {
-    font-family: 微軟正黑體;
-    position: fixed;
-    background-color:white;
-    top: 5%;
-    left:50%;
-    width: 400px;
-    height: 650px;
-    z-index: 999;
-    border-width: 50px;
-    border-radius: 5px;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.4);
+  font-family: 微軟正黑體;
+  position: fixed;
+  background-color:white;
+  top: 5%;
+  left:50%;
+  width: 400px;
+  height: 650px;
+  z-index: 999;
+  border-width: 50px;
+  border-radius: 5px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.4);
 }
 .place {
-    position: relative;
-    margin-left: 10px;
-  }
-
-.number{
   position: relative;
   margin-left: 10px;
 }
 
+.number{
+position: relative;
+margin-left: 10px;
+}
+
 .address {
-      position: relative;
-      margin-left: 10px;
-  }
+    position: relative;
+    margin-left: 10px;
+}
 .placeinput {
-    width: 50px;
-    height: 20px;
-    border:1px 	#66B3FF solid;
+  width: 50px;
+  height: 20px;
+  border:1px 	#66B3FF solid;
 }
 .placeinput::-webkit-input-placeholder {
-    font-size: 26px;
+  font-size: 26px;
 }
 
 .addressinput {
-    width: 50px;
-    height: 20px;
-    border: 2px black solid;
-    border:1px 	#66B3FF solid;
+  width: 50px;
+  height: 20px;
+  border: 2px black solid;
+  border:1px 	#66B3FF solid;
 }
 .numberinput{
-    width: 50px;
-    height: 20px;
-    border: 2px black solid;
-    border:1px 	#66B3FF solid;
+  width: 50px;
+  height: 20px;
+  border: 2px black solid;
+  border:1px 	#66B3FF solid;
 }
 
 .description {
-    position: relative;
-    text-align: left;
-    margin-left: 10px;
-}
-.description label{
+  position: relative;
   text-align: left;
-}
-.descriptionarea {
-    position: relative;
-}
-.time {
-    position: relative;
-    text-align: left;
-    margin-left: 10px;
-}
-.timearea {
-    position: relative;
-}
-.choosephoto{
   margin-left: 10px;
 }
+.description label{
+text-align: left;
+}
+.descriptionarea {
+  position: relative;
+}
+.time {
+  position: relative;
+  text-align: left;
+  margin-left: 10px;
+}
+.timearea {
+  position: relative;
+}
+.choosephoto{
+margin-left: 10px;
+}
 .cancel_submit{
-  float: right;
-  margin-right: 15px;
+float: right;
+margin-right: 15px;
 }
 #addplaceclose{
-  display: inline;
-  background-color: gray;
+display: inline;
+background-color: gray;
 }
 #submit_info{
-  display: inline;
+display: inline;
 }

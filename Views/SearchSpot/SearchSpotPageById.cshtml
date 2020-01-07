@@ -5,13 +5,14 @@
     ViewData["Title"] = "SearchSpotPageById";
 }
 @section css {
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
-   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="~/css/SearchSpotPageById.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="~/css/SearchSpotPageByDistrict.css">
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap" rel="stylesheet">
 }
 @section js {
- 
-      <script src="~/js/SearchSpotPageById.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="~/js/SearchSpotPageById.js"></script>
 }
 <body>
 
@@ -34,26 +35,28 @@
       @item.Id
     </div>
     <tr>
-        <td readonly align='center' valign="middle" width="100px" id="spot_id" ><font face="DFKai-sb" size="5" color=#0000AA>編號</font></td><td align='center' valign="middle" width="700px"><font face="DFKai-sb" color=#0000AA id="spot_id" >@item.Id</font></td>
+        <td readonly align='center' valign="middle" width="10%" id="spot_id" ><font face="DFKai-sb" size="4" >編號</font></td><td valign="middle" width="700px"><font size="4" face="DFKai-sb" id="spot_id" >@item.Id</font></td>
 
     </tr>
     <tr>
-      <td align='center' valign="middle" width="100px"><font face="DFKai-sb" size="5" color=#0000AA>區域</font></td><td><font face="DFKai-sb" color=#0000AA></font>@item.Zipcode</td>
+      <td width="10%"  align='center' valign="middle" width="100px"><font face="DFKai-sb" size="4" >區域</font></td><td><font size="4" face="DFKai-sb" ></font>@item.Zipcode</td>
     </tr>
     <tr>
-      <td align='center' valign="middle" width="100px"><font face="DFKai-sb" size="5" color=#0000AA>地名</font></td><td><font face="DFKai-sb" color=#0000AA>@item.Name</font></td>
+      <td width="10%"  align='center' valign="middle" width="100px"><font face="DFKai-sb" size="4" >地名</font></td><td><font  face="DFKai-sb" size="4">@item.Name</font></td>
     </tr>
 
     <tr>
-      <td align='center' valign="middle"><font face="DFKai-sb" size="5" color=#0000AA>地址</font></td><td><font face="DFKai-sb" color=#0000AA></font>@item.Address</td>
+      <td width="10%"  align='center' valign="middle"><font face="DFKai-sb" size="4" >地址</font></td><td><font size="4"  face="DFKai-sb" >@item.Address</font></td>
     </tr>
     <tr>
-      <td align='center' valign="middle"><font face="DFKai-sb" size="5" color=#0000AA>描述</font></td><td><font face="DFKai-sb" color=#0000AA></font>@item.Description</td>
+      <td width="10%"  align='center' valign="middle"><font face="DFKai-sb" size="4">描述</font></td><td><font size="4" face="DFKai-sb" >@item.Description</font></td>
     </tr>
     <tr>
-      <td align='center' valign="middle"><font face="DFKai-sb" size="5" color=#0000AA>營業時間</font></td><td><font face="DFKai-sb" color=#0000AA></font>@item.Opentime</td>
+      <td width="10%" align='center' valign="middle"><font face="DFKai-sb" size="4">營業時間</font></td><td><font size="4" face="DFKai-sb" >@item.Opentime</font></td>
     </tr>
     }
   </table>
 </div>
+
+<button type="button" id="BackTop" class="toTop-arrow"></button>
 </body>

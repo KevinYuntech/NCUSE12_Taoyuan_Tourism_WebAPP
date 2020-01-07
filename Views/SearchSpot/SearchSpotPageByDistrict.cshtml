@@ -7,20 +7,17 @@ ViewData["Title"] = "SearchSpotPageByDistrict";
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" href="~/css/Dialog.css">
 <link rel="stylesheet" href="~/css/SearchSpotPageByDistrict.css">
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 }
 @section js {
 <script src="~/js/SearchSpotPageByDistrict.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 }
 
 <body>
     <div class="container">
-        <div class="function_btn_area">
-            <button type="button" id="create_spot_btn" class="btn btn-primary edit_btn" data-toggle="modal"
-                data-target="#exampleModal">
-                新增景點
-            </button>
-            <button class="btn btn-success" id="view_Itneary_btn" type="button" onclick="">行程規劃</button>
-        </div>
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
@@ -91,36 +88,38 @@ ViewData["Title"] = "SearchSpotPageByDistrict";
                 </div>
             </div>
         </div>
-        <h2 align="center" id="title">
-            <font size="5"></font>
+           <font size="5"></font>
             </h1>
-
             <marquee scrollamount="10"><img src="~/Img/SearchSpotPageByDistrict/中央.jpg"><img
-                    src="~/Img/SearchSpotPageByDistrict/大溪.jpg"><img src="~/Img/SearchSpotPageByDistrict/小人國.jpg"><img
-                    src="~/Img/SearchSpotPageByDistrict/小烏來.jpg"><img src="~/Img/SearchSpotPageByDistrict/石門.jpg"><img
-                    src="~/Img/SearchSpotPageByDistrict/中壢夜市.jpg"><img src="~/Img/SearchSpotPageByDistrict/可樂.jpg"><img
-                    src="~/Img/SearchSpotPageByDistrict/拉拉山.jpg"><img src="~/SearchSpotPageByDistrict/高鐵.jpg"></marquee>
-            <br></br>
-            <br></br>
+                src="~/Img/SearchSpotPageByDistrict/大溪.jpg"><img src="~/Img/SearchSpotPageByDistrict/小人國.jpg"><img
+                src="~/Img/SearchSpotPageByDistrict/小烏來.jpg"><img src="~/Img/SearchSpotPageByDistrict/石門.jpg"><img
+                src="~/Img/SearchSpotPageByDistrict/中壢夜市.jpg"><img src="~/Img/SearchSpotPageByDistrict/可樂.jpg"><img
+                src="~/Img/SearchSpotPageByDistrict/拉拉山.jpg"><img src="~/SearchSpotPageByDistrict/高鐵.jpg"></marquee>
+            <br>
+            <h2 align="center" id="title"></h2>
+                    
+            <div class="function_btn_area">
+                <button type="button" id="create_spot_btn" class="btn btn-primary edit_btn" data-toggle="modal"
+                    data-target="#exampleModal">
+                    新增景點
+                </button>
+                <button class="btn btn-success" id="view_Itneary_btn" type="button" onclick="">行程規劃</button>
+            </div>
             <div position: absolute;>
                 <table border="1" id="SpotListTable">
-                    <tr>
-                        <th scope="col" width="15%">景點編號</th>
-                        <th scope="col" width="20%">景點名稱</th>
-                        <th scope="col" width="15%">郵遞區號</th>
-                        <th scope="col" width="15%">地址</th>
-                        <th scope="col" width="40%">景點介紹</th>
-                        <th scope="col" width="15%">開放時間</th>
-                        <th align='center' valign="middle" width="100px">
-                            <font size="5" face="DFKai-sb">加入行程
-                        </th>
-                        <th align='center' valign="middle" width="100px">
-                            <font size="5" face="DFKai-sb">查看詳細資料
-                        </th>
-                    </tr>
+                    <thead>
+                        <td align="center" scope="col" width="9%">景點編號</td>
+                        <td align="center" scope="col" width="15%">景點名稱</td>
+                        <td align="center" scope="col" width="9%">郵遞區號</td>
+                        <td align="center" scope="col" width="20%">地址</td>
+                        <td align="center" scope="col" width="25%">開放時間</td>
+                        <td align="center" colspan="2" align='center' width="22%" >
+                            操作
+                        </td>
+                    </thead>
                 </table>
             </div>
     </div>
-
+    <button type="button" id="BackTop" class="toTop-arrow"></button>
 
 </body>

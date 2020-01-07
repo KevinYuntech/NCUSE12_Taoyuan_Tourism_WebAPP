@@ -1,3 +1,65 @@
-body{
-    font-family: 微軟正黑體;
+@charset "UTF-8";
+@import url(font-awesome.min.css);
+@import url("https://fonts.googleapis.com/css?family=Scope+One|Trocchi");
+
+/*
+	Urban by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+*/
+
+/* Type */
+	html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+        font-family: Noto Sans TC, sans-serif;
+	}
+body {
+    background-color: #F8F8FF;
 }
+
+body, input, select, textarea {
+    font-family: Noto Sans TC, sans-serif;
+    font-size: 13pt;
+    font-weight: bold;
+    line-height: 1.65;
+}
+
+
+/* Table */
+
+
+	table {
+		margin: 0 0 2em 0;
+		width: 100%;
+        font-family: Noto Sans TC, sans-serif;
+        border:0;
+
+	}
+	thead {
+        background-color: rgb(0, 17, 255,0.5);
+        font: 0.9em;
+	}
+    	table tbody tr {
+		border-color: rgba(0, 0, 0, 0.1);
+
+	}
+
+		table tbody tr:nth-child(2n + 1) {
+			background-color: rgba(0, 0, 0, 0.075);
+		}
+
+	table th {
+		color: #000;
+
+	}
+
+	table thead {
+		border-bottom-color: rgba(0, 0, 0, 0.1);
+	}
+
+	table tfoot {
+		border-top-color: rgba(0, 0, 0, 0.1);
+	}
+
+	table.alt tbody tr td {
+		border-color: rgba(0, 0, 0, 0.1);
+	}

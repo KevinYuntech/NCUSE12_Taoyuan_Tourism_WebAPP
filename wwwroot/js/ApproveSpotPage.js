@@ -75,3 +75,31 @@ $(document).ready(function () {
         EditSpot(info);
     });
 });
+
+$(function(){
+	$('#BackTop').click(function(){ 
+		$('html,body').animate({scrollTop:0}, 333);
+	});
+	$(window).scroll(function() {
+		if ( $(this).scrollTop() > 150 ){
+			$('#BackTop').fadeIn(222);
+		} else {
+			$('#BackTop').stop().fadeOut(222);
+		}
+	}).scroll();
+});
+
+
+$(document).ready(function(){
+    $("div").on("scroll", function() { 
+        if ($("div").scrollTop() > 0) { 
+            $("#totop").fadeIn();
+        }
+        else {
+            $("#totop").fadeOut();
+        }
+    });
+    $("#totop").on("click", function() {
+    	$("div").animate({ scrollTop: 0 }, "slow");
+    });
+});

@@ -1,11 +1,198 @@
-body {
-    background-color:#ACD6FF;
-}
-input{border:0;
-background-color:#003C9D;
-color:#fff;border-radius:10px;}
+
+@charset "UTF-8";
+@import url(font-awesome.min.css);
+@import url("https://fonts.googleapis.com/css?family=Scope+One|Trocchi");
+
+/*
+	Urban by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+*/
+
+
+	html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+
+        font-family: Noto Sans TC, sans-serif;
+	}
+
+
 
 .function_btn_area{
     text-align: center;
     margin: 50px;
 }
+/* 48px */
+.toTop-arrow {
+	width: 3rem;
+	height: 3rem;
+	padding: 0;
+	margin: 0;
+	border: 0;
+	border-radius: 33%;
+	opacity: 0.6;
+	background: #000;
+	cursor: pointer;
+	position:fixed;
+	right: 1rem;
+	bottom: 1rem;
+	display: none;
+}
+.toTop-arrow::before, .toTop-arrow::after {
+	width: 25px;
+	height: 6px;
+	border-radius: 3px;
+	background: #008CBA;
+	position: absolute;
+	content: "";
+}
+.toTop-arrow::before {
+	transform: rotate(-45deg) translate(0, -50%);
+	left: 0.42rem;
+}
+.toTop-arrow::after {
+	transform: rotate(45deg) translate(0, -50%);
+	right: 0.42rem;
+}
+.toTop-arrow:focus {outline: none;}
+
+
+
+/* Type */
+
+	body {
+		background-color: #F8F8FF;
+	}
+
+	body, input, select, textarea {
+		font-family: Noto Sans TC, sans-serif;
+		font-size: 13pt;
+		font-weight: bold;
+		line-height: 1.65;
+	}
+
+		@media screen and (max-width: 1680px) {
+
+			body, input, select, textarea {
+				font-size: 11pt;
+			}
+
+		}
+
+		@media screen and (max-width: 1280px) {
+
+			body, input, select, textarea {
+				font-size: 11pt;
+			}
+
+		}
+
+		@media screen and (max-width: 980px) {
+
+			body, input, select, textarea {
+				font-size: 12pt;
+			}
+
+		}
+
+		@media screen and (max-width: 736px) {
+
+			body, input, select, textarea {
+				font-size: 12pt;
+			}
+
+		}
+
+		@media screen and (max-width: 480px) {
+
+			body, input, select, textarea {
+				font-size: 12pt;
+			}
+
+		}
+
+
+/* Table */
+
+
+	table {
+		margin: 0 0 2em 0;
+		width: 100%;
+        font-family: Noto Sans TC, sans-serif;
+        border:0;
+	}
+	thead {
+        background-color: rgb(204, 204, 255);
+        font: 0.9em;
+	}
+		table tbody tr {
+			border: solid 1px;
+			border-left: 0;
+			border-right: 0;
+		}
+
+		table td {
+			padding: 0.75em 0.75em;
+
+		}
+
+		table th {
+			font-size: 0.9em;
+			font-weight: 700;
+			padding: 0 0.75em 0.75em 0.75em;
+			text-align: left;
+		}
+
+
+		table.alt {
+			border-collapse: separate;
+
+		}
+
+			table.alt tbody tr td {
+				border: solid 1px;
+				border-left-width: 0;
+				border-top-width: 0;
+
+			}
+
+				table.alt tbody tr td:first-child {
+					border-left-width: 1px;
+				}
+
+			table.alt tbody tr:first-child td {
+				border-top-width: 1px;
+			}
+
+			table.alt thead {
+				border-bottom: 0;
+			}
+
+			table.alt tfoot {
+				border-top: 0;
+			}
+
+	table tbody tr {
+		border-color: rgba(0, 0, 0, 0.1);
+
+	}
+
+		table tbody tr:nth-child(2n + 1) {
+			background-color: rgba(0, 0, 0, 0.075);
+		}
+
+	table th {
+		color: #000;
+
+	}
+
+	table thead {
+		border-bottom-color: rgba(0, 0, 0, 0.1);
+	}
+
+	table tfoot {
+		border-top-color: rgba(0, 0, 0, 0.1);
+	}
+
+	table.alt tbody tr td {
+		border-color: rgba(0, 0, 0, 0.1);
+	}
